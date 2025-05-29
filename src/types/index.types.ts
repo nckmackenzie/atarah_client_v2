@@ -40,3 +40,5 @@ export interface Option {
   value: string
   label: string
 }
+
+export type ColorVariant = 'success' | 'warning' | 'error' | 'info'
