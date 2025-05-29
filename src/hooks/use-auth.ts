@@ -15,9 +15,9 @@ export function useAuth() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['auth-user'] })
-      queryClient.clear()
+      queryClient.removeQueries()
       router.invalidate()
-      //   router.navigate({ to: '/login', replace: true })
+      router.navigate({ to: '/login', replace: true })
     },
   })
 
