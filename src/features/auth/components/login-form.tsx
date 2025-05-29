@@ -50,7 +50,7 @@ export function LoginForm() {
                 form.reset()
                 queryClient.invalidateQueries({ queryKey: ['auth-user'] })
                 router.invalidate()
-                router.navigate({ to: '/', replace: true })
+                router.navigate({ to: '/dashboard', replace: true })
               },
               onError: (error) => {
                 if (isAxiosError(error)) {
