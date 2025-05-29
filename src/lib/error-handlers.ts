@@ -18,7 +18,7 @@ export const handleApiErrors = <T extends Record<string, any>>(
   })
 }
 
-export function muatationErrorHandler(error: unknown) {
+export function mutationErrorHandler(error: unknown) {
   let errors = ''
   if (isAxiosError(error)) {
     switch (error.status) {
