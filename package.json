@@ -48,6 +48,8 @@
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
+    "babel-plugin-react-compiler": "^19.1.0-rc.2",
+    "eslint-plugin-react-hooks": "^6.0.0-rc.1",
     "jsdom": "^26.0.0",
     "prettier": "^3.5.3",
     "typescript": "^5.7.2",
