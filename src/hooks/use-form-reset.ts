@@ -3,8 +3,12 @@ import { useError } from '@/hooks/use-error'
 
 export function useFormReset<T extends FieldValues>() {
   const { clearErrors } = useError()
-  return (form: UseFormReturn<T>) => {
-    clearErrors()
+  return (form: UseFormReturn<T>, onErrorClear?: () => void) => {
+    if (onErrorClear) {
+      onErrorClear()
+    } else {
+      clearErrors()
+    }
     form.reset()
   }
 }
