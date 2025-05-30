@@ -8,6 +8,11 @@ import { routeTree } from './routeTree.gen'
 import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
 import * as TanStackQueryProvider from '@/integrations/tanstack-query/root-provider.tsx'
+import { FullPageLoader } from '@/components/custom/loaders.tsx'
+import {
+  ErrorComponent,
+  NotFound,
+} from '@/components/custom/error-component.tsx'
 
 // Create a new router instance
 export const router = createRouter({
@@ -19,6 +24,19 @@ export const router = createRouter({
   scrollRestoration: true,
   defaultStructuralSharing: true,
   defaultPreloadStaleTime: 0,
+  defaultPendingComponent: () => <FullPageLoader />,
+  defaultErrorComponent: ({ error, reset }) => (
+    <ErrorComponent
+      title="Error"
+      message={error.message}
+      action={{ onClick: () => reset() }}
+    />
+  ),
+  defaultNotFoundComponent: () => (
+    <div className="h-dvh flex items-center justify-center">
+      <NotFound />
+    </div>
+  ),
 })
 
 // Register the router instance for type safety
