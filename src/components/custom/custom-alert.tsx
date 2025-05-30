@@ -32,7 +32,7 @@ export function CustomAlert({ variant, description, title }: CustomAlertProps) {
                     : 'Important'}
               :
             </strong>{' '}
-            {description}.
+            {description}
           </span>{' '}
         </div>
       ) : (
