@@ -6,6 +6,7 @@ import {
 } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/custom/app-sidebar'
 import { formsQueryOptions } from '@/features/auth/utils/query-options'
+import { NotFound } from '@/components/custom/error-component'
 
 export const Route = createFileRoute('/_authenticated')({
   beforeLoad: ({ context, location }) => {
@@ -18,6 +19,11 @@ export const Route = createFileRoute('/_authenticated')({
   },
   loader: async ({ context }) =>
     await context.queryClient.ensureQueryData(formsQueryOptions()),
+  notFoundComponent: () => (
+    <div className="h-[calc(100dvh-4rem)] flex items-center justify-center">
+      <NotFound />
+    </div>
+  ),
   component: RouteComponent,
 })
 
@@ -32,7 +38,9 @@ function RouteComponent() {
           </div>
         </header>
         <div className="flex flex-col flex-1 gap-4 p-4 md:p-6 ">
-          <Outlet />
+          <div className="container">
+            <Outlet />
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>
