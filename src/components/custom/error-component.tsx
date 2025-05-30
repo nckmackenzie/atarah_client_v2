@@ -93,3 +93,25 @@ export function NotFound() {
     </div>
   )
 }
+
+export function ResourceNotFound() {
+  return (
+    <div className="flex flex-col gap-y-6 items-center justify-center px-4 sm:px-6 lg:px-8 h-[calc(100dvh-10rem)]">
+      <img src="/empty.svg" alt="empty state vector" />
+      <div className="text-center">
+        <h4 className="text-2xl font-semibold text-accent-foreground">
+          Resource not found!!
+        </h4>
+        <p className="text-muted-foreground text-sm">
+          The resource you are looking for does not exist or has been removed.
+        </p>
+      </div>
+      <Button asChild variant="default" size={'lg'}>
+        <Link to="..">
+          <ArrowLeft className="w-5 h-5" />
+          Go Back
+        </Link>
+      </Button>
+    </div>
+  )
+}
