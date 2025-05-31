@@ -16,6 +16,10 @@ export interface WithName {
   name: string
 }
 
+export interface WithCreatedAt {
+  createdAt: string
+}
+
 export interface WithIdAndName extends WithId, WithName {}
 
 export interface IsEdit {
