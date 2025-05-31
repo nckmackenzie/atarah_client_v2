@@ -1,4 +1,5 @@
 import { format } from 'date-fns'
+import type { Option } from '@/types/index.types'
 
 export const titleCase = (str: string) => {
   return str.toLowerCase().replace(/\b\w/g, (s) => s.toUpperCase())
@@ -55,4 +56,15 @@ export const compactNumberFormatter = (value: string | number) => {
 
 export const fileSuffix = () => {
   return format(new Date(), 'ddMMyyyyhhmmss')
+}
+
+export function transformOptions(
+  data: Array<any>,
+  valueField: string = 'id',
+  labelField: string = 'name',
+): Array<Option> {
+  return data.map((item) => ({
+    value: item[valueField].toString(),
+    label: item[labelField].toString().toUpperCase(),
+  }))
 }
