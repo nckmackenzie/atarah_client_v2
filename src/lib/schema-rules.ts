@@ -30,3 +30,5 @@ export const requiredNumberSchemaEntry = (message?: string) =>
     .refine((value) => !isNaN(value) && value > 0, {
       message: 'This field must be a valid number greater than 0',
     })
+
+export const searchValidateSchema = z.object({ q: z.string().optional() })
