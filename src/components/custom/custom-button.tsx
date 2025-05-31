@@ -20,8 +20,8 @@ export function EditAction() {
 export function DeleteAction() {
   return (
     <>
-      <Trash2Icon className="mr-2 icon text-destructive" />
-      <span>Delete</span>
+      <Trash2Icon className="icon text-destructive" />
+      <span className="text-destructive">Delete</span>
     </>
   )
 }
