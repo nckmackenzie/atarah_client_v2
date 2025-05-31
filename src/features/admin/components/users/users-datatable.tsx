@@ -46,6 +46,11 @@ export function UsersDatatable({ users }: { users: Array<User> }) {
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Role" />
       ),
+      cell: ({
+        row: {
+          original: { role },
+        },
+      }) => <div>{role?.name ?? ''}</div>,
     },
     {
       accessorKey: 'active',
