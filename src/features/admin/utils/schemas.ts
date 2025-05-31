@@ -27,3 +27,8 @@ export const usersFormSchema = z
       })
     }
   })
+
+export const roleFormSchema = z.object({
+  name: requiredStringSchemaEntry('Role name is required'),
+  isActive: z.boolean(),
+})
