@@ -94,7 +94,7 @@ export function RolesForm({ role }: RolesFormProps) {
         }
       },
       onSuccess: () => {
-        successHandler(isEdit, ['roles'], '/roles')
+        successHandler(isEdit, ['roles'], '/roles', 'role')
       },
     })
   }
