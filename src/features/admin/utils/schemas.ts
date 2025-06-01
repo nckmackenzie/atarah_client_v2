@@ -2,6 +2,7 @@ import { z } from 'zod'
 // import { passwordValidator } from '@/features/auth/lib/utils';
 import { isValidPhoneNumber } from '@/lib/utils'
 import {
+  optionalNumberSchemaEntry,
   optionalStringSchemaEntry,
   requiredStringSchemaEntry,
 } from '@/lib/schema-rules'
@@ -35,3 +36,26 @@ export const roleFormSchema = z.object({
   }),
   isActive: z.boolean(),
 })
+
+export const customerFormSchema = z
+  .object({
+    name: requiredStringSchemaEntry('Name is required').toLowerCase(),
+    email: requiredStringSchemaEntry('Email is required')
+      .email('Invalid email address')
+      .toLowerCase(),
+    contact: requiredStringSchemaEntry('Contact is required'),
+    address: optionalStringSchemaEntry(),
+    taxPin: optionalStringSchemaEntry(),
+    openingBalance: optionalNumberSchemaEntry(),
+    openingBalanceDate: z.coerce.date().optional(),
+    active: z.boolean(),
+  })
+  .superRefine(({ openingBalance, openingBalanceDate }, ctx) => {
+    if (openingBalance && openingBalance > 0 && !openingBalanceDate) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Opening balance date is required',
+        path: ['openingBalanceDate'],
+      })
+    }
+  })

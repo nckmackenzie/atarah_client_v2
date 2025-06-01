@@ -1,5 +1,6 @@
 import type { z } from 'zod'
 import type {
+  customerFormSchema,
   roleFormSchema,
   usersFormSchema,
 } from '@/features/admin/utils/schemas'
@@ -30,3 +31,8 @@ export type SingleRole = Omit<Role, 'usersCount' | 'rights'> & {
     form: WithName & { id: number }
   }>
 }
+
+export type ClientFormValues = z.infer<typeof customerFormSchema>
+export type Client = WithId &
+  WithCreatedAt &
+  Omit<ClientFormValues, 'openingBalanceDate' | 'openingBalance'>
