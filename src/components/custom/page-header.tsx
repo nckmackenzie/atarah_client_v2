@@ -1,14 +1,20 @@
-import type { PropsWithChildren } from 'react'
+import { Link } from '@tanstack/react-router'
+import { Plus } from 'lucide-react'
+import type { TRoutes } from '@/types/index.types'
+import { Button } from '@/components/ui/button'
 
-interface PageHeaderProps extends PropsWithChildren {
+interface PageHeaderProps {
   title: string
+  buttonText?: string
+  path?: TRoutes
   description?: string
 }
 
 export default function PageHeader({
   title,
-  children,
+  path,
   description,
+  buttonText,
 }: PageHeaderProps) {
   return (
     <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
@@ -18,7 +24,14 @@ export default function PageHeader({
           <p className="text-muted-foreground text-sm">{description}</p>
         )}
       </div>
-      {children}
+      {path && (
+        <Button size="lg" asChild className="w-full sm:w-auto">
+          <Link to={path} className="flex items-center gap-x-2">
+            <Plus />
+            <span>{buttonText || 'Create New'}</span>
+          </Link>
+        </Button>
+      )}
     </header>
   )
 }
