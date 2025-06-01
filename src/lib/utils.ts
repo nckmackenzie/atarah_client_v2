@@ -1,7 +1,10 @@
 import { clsx } from 'clsx'
+import { toast } from 'sonner'
 import { twMerge } from 'tailwind-merge'
-import type { Option } from '@/types/index.types'
+import type { Option, TRoutes } from '@/types/index.types'
 import type { ClassValue } from 'clsx'
+import { getContext } from '@/integrations/tanstack-query/root-provider'
+import { router } from '@/main'
 
 export const PAYMENT_METHOD: Array<Option> = [
   {
@@ -39,4 +42,29 @@ export function generateUniqueString(length: number) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength))
   }
   return result
+}
+
+export function searchParamsToObject(
+  params: Record<string, string | number | boolean | undefined | null>,
+) {
+  const searchParams = new URLSearchParams()
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== '') {
+      searchParams.append(key, value.toString())
+    }
+  })
+  return searchParams
+}
+
+export function successHandler(
+  isEdit: boolean,
+  invalidateKey: Array<string>,
+  redirectTo: TRoutes,
+) {
+  const { queryClient } = getContext()
+  toast.success(`${isEdit ? 'Updated' : 'Created'} role successfully!`)
+  queryClient.invalidateQueries({
+    queryKey: invalidateKey,
+  })
+  router.navigate({ to: redirectTo })
 }
