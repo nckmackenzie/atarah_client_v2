@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { useDocumentTitle } from '@/hooks/use-title'
 import { roleQueryOptions } from '@/features/admin/services/query-options'
 import { searchValidateSchema } from '@/lib/schema-rules'
-import { FormLoader } from '@/components/custom/loaders'
+import { AuthedPageLoader } from '@/components/custom/loaders'
 import { CustomAlert } from '@/components/custom/custom-alert'
 import Search from '@/components/custom/search'
 import { Rolesdatatable } from '@/features/admin/components/roles/roles-datatable'
@@ -17,7 +17,7 @@ export const Route = createFileRoute('/_authenticated/roles/')({
   loader: async ({ context, deps: { q } }) =>
     await context.queryClient.ensureQueryData(roleQueryOptions.all(q)),
   component: RolesRouteComponent,
-  pendingComponent: () => <FormLoader />,
+  pendingComponent: () => <AuthedPageLoader />,
   errorComponent: ({ error }) => (
     <CustomAlert variant="error" description={error.message} />
   ),
