@@ -1,4 +1,5 @@
 import { useTransition } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
 import { Trash2Icon } from 'lucide-react'
 import { toast } from 'sonner'
 import {
@@ -16,15 +17,26 @@ import {
 interface AlertDialogDemoProps {
   action: () => Promise<void>
   description: string
+  toastMessage?: string
+  invalidateKey?: Array<string>
 }
 
-export function DeletePrompt({ action, description }: AlertDialogDemoProps) {
+export function DeletePrompt({
+  action,
+  description,
+  toastMessage,
+  invalidateKey,
+}: AlertDialogDemoProps) {
   const [isLoading, startTransition] = useTransition()
+  const queryClient = useQueryClient()
   function performAction() {
     startTransition(async () => {
       try {
         await action()
-        // toast.success(toastMessage || 'Action performed successfully!');
+        toast.success(toastMessage || 'Action performed successfully!')
+        if (invalidateKey) {
+          queryClient.invalidateQueries({ queryKey: invalidateKey })
+        }
         // onSuccess?.();
       } catch (err) {
         // console.log(err);
