@@ -60,9 +60,10 @@ export function successHandler(
   isEdit: boolean,
   invalidateKey: Array<string>,
   redirectTo: TRoutes,
+  resource: string,
 ) {
   const { queryClient } = getContext()
-  toast.success(`${isEdit ? 'Updated' : 'Created'} role successfully!`)
+  toast.success(`${isEdit ? 'Updated' : 'Created'} ${resource} successfully!`)
   queryClient.invalidateQueries({
     queryKey: invalidateKey,
   })
