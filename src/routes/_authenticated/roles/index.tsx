@@ -5,9 +5,9 @@ import { useDocumentTitle } from '@/hooks/use-title'
 import { roleQueryOptions } from '@/features/admin/services/query-options'
 import { searchValidateSchema } from '@/lib/schema-rules'
 import { AuthedPageLoader } from '@/components/custom/loaders'
-import { CustomAlert } from '@/components/custom/custom-alert'
 import Search from '@/components/custom/search'
 import { Rolesdatatable } from '@/features/admin/components/roles/roles-datatable'
+import { ErrorNotification } from '@/components/custom/error-component'
 
 export const Route = createFileRoute('/_authenticated/roles/')({
   validateSearch: searchValidateSchema,
@@ -16,9 +16,7 @@ export const Route = createFileRoute('/_authenticated/roles/')({
     await context.queryClient.ensureQueryData(roleQueryOptions.all(q)),
   component: RolesRouteComponent,
   pendingComponent: () => <AuthedPageLoader />,
-  errorComponent: ({ error }) => (
-    <CustomAlert variant="error" description={error.message} />
-  ),
+  errorComponent: ({ error }) => <ErrorNotification message={error.message} />,
 })
 
 function RolesRouteComponent() {
