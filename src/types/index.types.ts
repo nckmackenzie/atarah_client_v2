@@ -1,3 +1,5 @@
+import type { FileRoutesByTo } from '@/routeTree.gen'
+
 export type UserType = 'admin' | 'user'
 
 export interface User {
@@ -46,3 +48,4 @@ export interface Option {
 }
 
 export type ColorVariant = 'success' | 'warning' | 'error' | 'info'
+export type TRoutes = keyof FileRoutesByTo
