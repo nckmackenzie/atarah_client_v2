@@ -18,7 +18,7 @@ interface AlertDialogDemoProps {
   description: string
 }
 
-export function AlertDialogDemo({ action, description }: AlertDialogDemoProps) {
+export function DeletePrompt({ action, description }: AlertDialogDemoProps) {
   const [isLoading, startTransition] = useTransition()
   function performAction() {
     startTransition(async () => {
