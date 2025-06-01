@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { AlertCircle, ArrowLeft, CircleGauge } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import worriedRafiki from '@/assets/worried-rafiki.svg'
 
 interface ErrorProps {
   title?: string
@@ -112,6 +113,38 @@ export function ResourceNotFound() {
           Go Back
         </Link>
       </Button>
+    </div>
+  )
+}
+
+interface ErrorNotificationProps {
+  className?: string
+  message?: string
+}
+
+export function ErrorNotification({
+  className,
+  message,
+}: ErrorNotificationProps) {
+  return (
+    <div
+      className={cn(
+        'flex flex-col items-center justify-center h-[calc(100dvh-10rem)] bg-background text-foreground p-4',
+        className,
+      )}
+    >
+      <img
+        className="size-56"
+        src={worriedRafiki}
+        alt="Worried rafiki vector"
+      />
+      <h1 className="text-4xl font-bold mb-2">Something went wrong</h1>
+      <p className="text-xl mb-4">
+        We're sorry, but an error occurred while processing your request.
+      </p>
+      <p className="text-muted-foreground mb-6">
+        Error: {message || 'Unknown error'}
+      </p>
     </div>
   )
 }
