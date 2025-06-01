@@ -3,9 +3,13 @@ import type {
   roleFormSchema,
   usersFormSchema,
 } from '@/features/admin/utils/schemas'
-import type { WithCreatedAt, WithId, WithIdAndName } from '@/types/index.types'
+import type {
+  WithCreatedAt,
+  WithId,
+  WithIdAndName,
+  WithName,
+} from '@/types/index.types'
 
-// USER TYPES
 export type UserFormValues = z.infer<typeof usersFormSchema>
 export type User = WithId &
   WithCreatedAt &
@@ -15,4 +19,14 @@ export type User = WithId &
   }
 
 export type RoleFormValues = z.infer<typeof roleFormSchema>
-export type Role = WithId & WithCreatedAt & RoleFormValues
+export type Role = WithId &
+  WithCreatedAt &
+  RoleFormValues & {
+    usersCount: number
+  }
+
+export type SingleRole = Omit<Role, 'usersCount' | 'rights'> & {
+  rights: Array<{
+    form: WithName & { id: number }
+  }>
+}

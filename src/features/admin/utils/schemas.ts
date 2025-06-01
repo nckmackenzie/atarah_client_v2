@@ -30,5 +30,8 @@ export const usersFormSchema = z
 
 export const roleFormSchema = z.object({
   name: requiredStringSchemaEntry('Role name is required'),
+  rights: z.array(z.coerce.number(), {
+    required_error: 'Select at least one form',
+  }),
   isActive: z.boolean(),
 })
