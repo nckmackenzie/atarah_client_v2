@@ -13,7 +13,7 @@ import {
 import { EditAction } from '@/components/custom/custom-button'
 import CustomDropdownContent from '@/components/custom/custom-dropdown-content'
 import { AdminGuard } from '@/components/custom/admin-guard'
-import { AlertDialogDemo } from '@/components/custom/delete-prompt'
+import { DeletePrompt } from '@/components/custom/delete-prompt'
 import axios from '@/lib/api/axios'
 
 export function UsersDatatable({ users }: { users: Array<User> }) {
@@ -88,7 +88,7 @@ export function UsersDatatable({ users }: { users: Array<User> }) {
               </Link>
             </DropdownMenuItem>
             <AdminGuard>
-              <AlertDialogDemo
+              <DeletePrompt
                 description="This action cannot be undone. This will permanently delete the selected user."
                 action={() => deleteUser(id)}
               />
