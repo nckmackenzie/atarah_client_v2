@@ -1,4 +1,3 @@
-import { queryOptions } from '@tanstack/react-query'
 import type {
   Client,
   Project,
@@ -8,114 +7,21 @@ import type {
   User,
 } from '@/features/admin/utils/admin.types'
 
-import { mutationErrorHandler } from '@/lib/error-handlers'
-import axios from '@/lib/api/axios'
-import {
-  createDetailQuery,
-  createListQuery,
-  searchParamsToObject,
-} from '@/lib/utils'
+import { createDetailQuery, createListQuery } from '@/lib/utils'
 
 export const userQueryOptions = {
-  all: (q?: string) =>
-    queryOptions({
-      queryKey: ['users', { q }],
-      queryFn: async (): Promise<{ data: Array<User> }> => {
-        const params = new URLSearchParams()
-        if (q && q.trim().length > 0) {
-          params.append('q', q)
-        }
-        try {
-          const { data } = await axios('/api/users?' + params.toString())
-
-          return data
-        } catch (err) {
-          const error = mutationErrorHandler(err)
-          throw new Error(error)
-        }
-      },
-    }),
-
-  user: (id: string) =>
-    queryOptions({
-      queryKey: ['users', id],
-      queryFn: async (): Promise<{ data: User }> => {
-        try {
-          const { data } = await axios('/api/users/' + id)
-
-          return data
-        } catch (err) {
-          const error = mutationErrorHandler(err)
-          throw new Error(error)
-        }
-      },
-    }),
+  all: createListQuery<User>('users', '/api/users'),
+  user: createDetailQuery<User>('user', '/api/users'),
 }
 
 export const roleQueryOptions = {
-  all: (q?: string) =>
-    queryOptions({
-      queryKey: ['roles', { q }],
-      queryFn: async (): Promise<{ data: Array<Role> }> => {
-        const params = searchParamsToObject({ q })
-        try {
-          const { data } = await axios('/api/roles?' + params.toString())
-
-          return data
-        } catch (err) {
-          const error = mutationErrorHandler(err)
-          throw new Error(error)
-        }
-      },
-    }),
-
-  role: (id: string) =>
-    queryOptions({
-      queryKey: ['role', id],
-      queryFn: async (): Promise<{ data: SingleRole }> => {
-        try {
-          const { data } = await axios('/api/roles/' + id)
-
-          return data
-        } catch (err) {
-          const error = mutationErrorHandler(err)
-          throw new Error(error)
-        }
-      },
-    }),
+  all: createListQuery<Role>('roles', '/api/roles'),
+  role: createDetailQuery<SingleRole>('role', '/api/roles'),
 }
 
 export const clientQueryOptions = {
-  all: (q?: string) =>
-    queryOptions({
-      queryKey: ['clients', { q }],
-      queryFn: async (): Promise<{ data: Array<Client> }> => {
-        const params = searchParamsToObject({ q })
-        try {
-          const { data } = await axios('/api/clients?' + params.toString())
-
-          return data
-        } catch (err) {
-          const error = mutationErrorHandler(err)
-          throw new Error(error)
-        }
-      },
-    }),
-
-  client: (id: string) =>
-    queryOptions({
-      queryKey: ['client', id],
-      queryFn: async (): Promise<{ data: Client }> => {
-        try {
-          const { data } = await axios('/api/clients/' + id)
-
-          return data
-        } catch (err) {
-          const error = mutationErrorHandler(err)
-          throw new Error(error)
-        }
-      },
-    }),
+  all: createListQuery<Client>('clients', '/api/clients'),
+  client: createDetailQuery<Client>('client', '/api/clients'),
 }
 
 export const serviceQueryOptions = {
@@ -125,5 +31,5 @@ export const serviceQueryOptions = {
 
 export const projectQueryOptions = {
   all: createListQuery<Project>('projects', '/api/projects'),
-  service: createDetailQuery<Project>('projects', '/api/projects'),
+  project: createDetailQuery<Project>('projects', '/api/projects'),
 }
