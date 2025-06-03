@@ -8,6 +8,7 @@ interface PageHeaderProps {
   buttonText?: string
   path?: TRoutes
   description?: string
+  content?: React.ReactNode
 }
 
 export default function PageHeader({
@@ -15,6 +16,7 @@ export default function PageHeader({
   path,
   description,
   buttonText,
+  content,
 }: PageHeaderProps) {
   return (
     <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
@@ -32,6 +34,7 @@ export default function PageHeader({
           </Link>
         </Button>
       )}
+      {content && content}
     </header>
   )
 }
