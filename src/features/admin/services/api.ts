@@ -1,8 +1,10 @@
 import type {
   ClientFormValues,
   RoleFormValues,
+  ServiceFormValues,
 } from '@/features/admin/utils/admin.types'
 import axios from '@/lib/api/axios'
+import { createResource, deleteResource, updateResource } from '@/lib/utils'
 
 export async function createRole(values: RoleFormValues) {
   await axios.post('/api/roles', values)
@@ -22,4 +24,15 @@ export async function updateClient(id: string, values: ClientFormValues) {
 
 export async function deleteClient(id: string) {
   await axios.delete(`/api/clients/${id}`)
+}
+export async function createService(values: ServiceFormValues) {
+  await createResource<ServiceFormValues>('services', values)
+}
+
+export async function updateService(id: string, values: ServiceFormValues) {
+  await updateResource<ServiceFormValues>('services', id, values)
+}
+
+export async function deleteService(id: string) {
+  await deleteResource(`services`, id)
 }
