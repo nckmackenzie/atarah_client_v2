@@ -2,6 +2,7 @@ import type { z } from 'zod'
 import type {
   customerFormSchema,
   roleFormSchema,
+  serviceFormSchema,
   usersFormSchema,
 } from '@/features/admin/utils/schemas'
 import type {
@@ -36,3 +37,11 @@ export type ClientFormValues = z.infer<typeof customerFormSchema>
 export type Client = WithId &
   WithCreatedAt &
   Omit<ClientFormValues, 'openingBalanceDate' | 'openingBalance'>
+
+export type ServiceFormValues = z.infer<typeof serviceFormSchema>
+
+export type Service = WithId &
+  WithCreatedAt &
+  Omit<ServiceFormValues, 'glAccountId'> & {
+    account: WithIdAndName
+  }
