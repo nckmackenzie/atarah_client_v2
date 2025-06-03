@@ -1,5 +1,6 @@
 import type {
   ClientFormValues,
+  ProjectFormValues,
   RoleFormValues,
   ServiceFormValues,
 } from '@/features/admin/utils/admin.types'
@@ -35,4 +36,16 @@ export async function updateService(id: string, values: ServiceFormValues) {
 
 export async function deleteService(id: string) {
   await deleteResource(`services`, id)
+}
+
+export async function createProject(values: ProjectFormValues) {
+  await createResource<ProjectFormValues>('projects', values)
+}
+
+export async function updateProject(id: string, values: ProjectFormValues) {
+  await updateResource<ProjectFormValues>('projects', id, values)
+}
+
+export async function deleteProject(id: string) {
+  await deleteResource(`projects`, id)
 }
