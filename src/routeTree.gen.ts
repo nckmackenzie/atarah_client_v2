@@ -11,15 +11,149 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as IndexImport } from './routes/index'
+import { Route as AuthenticatedDashboardImport } from './routes/_authenticated/dashboard'
+import { Route as authLoginImport } from './routes/(auth)/login'
+import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
+import { Route as AuthenticatedServicesIndexImport } from './routes/_authenticated/services/index'
+import { Route as AuthenticatedRolesIndexImport } from './routes/_authenticated/roles/index'
+import { Route as AuthenticatedProjectsIndexImport } from './routes/_authenticated/projects/index'
+import { Route as AuthenticatedClientsIndexImport } from './routes/_authenticated/clients/index'
+import { Route as AuthenticatedUsersNewImport } from './routes/_authenticated/users/new'
+import { Route as AuthenticatedServicesNewImport } from './routes/_authenticated/services/new'
+import { Route as AuthenticatedRolesNewImport } from './routes/_authenticated/roles/new'
+import { Route as AuthenticatedProjectsNewImport } from './routes/_authenticated/projects/new'
+import { Route as AuthenticatedClientsNewImport } from './routes/_authenticated/clients/new'
+import { Route as AuthenticatedUsersUserIdEditImport } from './routes/_authenticated/users/$userId.edit'
+import { Route as AuthenticatedServicesServiceIdEditImport } from './routes/_authenticated/services/$serviceId.edit'
+import { Route as AuthenticatedRolesRoleIdEditImport } from './routes/_authenticated/roles/$roleId.edit'
+import { Route as AuthenticatedProjectsProjectIdEditImport } from './routes/_authenticated/projects/$projectId.edit'
+import { Route as AuthenticatedClientsClientIdEditImport } from './routes/_authenticated/clients/$clientId.edit'
 
 // Create/Update Routes
+
+const AuthenticatedRoute = AuthenticatedImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
+
+const AuthenticatedDashboardRoute = AuthenticatedDashboardImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const authLoginRoute = authLoginImport.update({
+  id: '/(auth)/login',
+  path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
+  id: '/users/',
+  path: '/users/',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedServicesIndexRoute = AuthenticatedServicesIndexImport.update(
+  {
+    id: '/services/',
+    path: '/services/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any,
+)
+
+const AuthenticatedRolesIndexRoute = AuthenticatedRolesIndexImport.update({
+  id: '/roles/',
+  path: '/roles/',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedProjectsIndexRoute = AuthenticatedProjectsIndexImport.update(
+  {
+    id: '/projects/',
+    path: '/projects/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any,
+)
+
+const AuthenticatedClientsIndexRoute = AuthenticatedClientsIndexImport.update({
+  id: '/clients/',
+  path: '/clients/',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedUsersNewRoute = AuthenticatedUsersNewImport.update({
+  id: '/users/new',
+  path: '/users/new',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedServicesNewRoute = AuthenticatedServicesNewImport.update({
+  id: '/services/new',
+  path: '/services/new',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedRolesNewRoute = AuthenticatedRolesNewImport.update({
+  id: '/roles/new',
+  path: '/roles/new',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedProjectsNewRoute = AuthenticatedProjectsNewImport.update({
+  id: '/projects/new',
+  path: '/projects/new',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedClientsNewRoute = AuthenticatedClientsNewImport.update({
+  id: '/clients/new',
+  path: '/clients/new',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedUsersUserIdEditRoute =
+  AuthenticatedUsersUserIdEditImport.update({
+    id: '/users/$userId/edit',
+    path: '/users/$userId/edit',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedServicesServiceIdEditRoute =
+  AuthenticatedServicesServiceIdEditImport.update({
+    id: '/services/$serviceId/edit',
+    path: '/services/$serviceId/edit',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedRolesRoleIdEditRoute =
+  AuthenticatedRolesRoleIdEditImport.update({
+    id: '/roles/$roleId/edit',
+    path: '/roles/$roleId/edit',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedProjectsProjectIdEditRoute =
+  AuthenticatedProjectsProjectIdEditImport.update({
+    id: '/projects/$projectId/edit',
+    path: '/projects/$projectId/edit',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedClientsClientIdEditRoute =
+  AuthenticatedClientsClientIdEditImport.update({
+    id: '/clients/$clientId/edit',
+    path: '/clients/$clientId/edit',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -32,39 +166,325 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthenticatedImport
+      parentRoute: typeof rootRoute
+    }
+    '/(auth)/login': {
+      id: '/(auth)/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof authLoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/clients/new': {
+      id: '/_authenticated/clients/new'
+      path: '/clients/new'
+      fullPath: '/clients/new'
+      preLoaderRoute: typeof AuthenticatedClientsNewImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/projects/new': {
+      id: '/_authenticated/projects/new'
+      path: '/projects/new'
+      fullPath: '/projects/new'
+      preLoaderRoute: typeof AuthenticatedProjectsNewImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/roles/new': {
+      id: '/_authenticated/roles/new'
+      path: '/roles/new'
+      fullPath: '/roles/new'
+      preLoaderRoute: typeof AuthenticatedRolesNewImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/services/new': {
+      id: '/_authenticated/services/new'
+      path: '/services/new'
+      fullPath: '/services/new'
+      preLoaderRoute: typeof AuthenticatedServicesNewImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/users/new': {
+      id: '/_authenticated/users/new'
+      path: '/users/new'
+      fullPath: '/users/new'
+      preLoaderRoute: typeof AuthenticatedUsersNewImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/clients/': {
+      id: '/_authenticated/clients/'
+      path: '/clients'
+      fullPath: '/clients'
+      preLoaderRoute: typeof AuthenticatedClientsIndexImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/projects/': {
+      id: '/_authenticated/projects/'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof AuthenticatedProjectsIndexImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/roles/': {
+      id: '/_authenticated/roles/'
+      path: '/roles'
+      fullPath: '/roles'
+      preLoaderRoute: typeof AuthenticatedRolesIndexImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/services/': {
+      id: '/_authenticated/services/'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof AuthenticatedServicesIndexImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/users/': {
+      id: '/_authenticated/users/'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AuthenticatedUsersIndexImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/clients/$clientId/edit': {
+      id: '/_authenticated/clients/$clientId/edit'
+      path: '/clients/$clientId/edit'
+      fullPath: '/clients/$clientId/edit'
+      preLoaderRoute: typeof AuthenticatedClientsClientIdEditImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/projects/$projectId/edit': {
+      id: '/_authenticated/projects/$projectId/edit'
+      path: '/projects/$projectId/edit'
+      fullPath: '/projects/$projectId/edit'
+      preLoaderRoute: typeof AuthenticatedProjectsProjectIdEditImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/roles/$roleId/edit': {
+      id: '/_authenticated/roles/$roleId/edit'
+      path: '/roles/$roleId/edit'
+      fullPath: '/roles/$roleId/edit'
+      preLoaderRoute: typeof AuthenticatedRolesRoleIdEditImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/services/$serviceId/edit': {
+      id: '/_authenticated/services/$serviceId/edit'
+      path: '/services/$serviceId/edit'
+      fullPath: '/services/$serviceId/edit'
+      preLoaderRoute: typeof AuthenticatedServicesServiceIdEditImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/users/$userId/edit': {
+      id: '/_authenticated/users/$userId/edit'
+      path: '/users/$userId/edit'
+      fullPath: '/users/$userId/edit'
+      preLoaderRoute: typeof AuthenticatedUsersUserIdEditImport
+      parentRoute: typeof AuthenticatedImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface AuthenticatedRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedClientsNewRoute: typeof AuthenticatedClientsNewRoute
+  AuthenticatedProjectsNewRoute: typeof AuthenticatedProjectsNewRoute
+  AuthenticatedRolesNewRoute: typeof AuthenticatedRolesNewRoute
+  AuthenticatedServicesNewRoute: typeof AuthenticatedServicesNewRoute
+  AuthenticatedUsersNewRoute: typeof AuthenticatedUsersNewRoute
+  AuthenticatedClientsIndexRoute: typeof AuthenticatedClientsIndexRoute
+  AuthenticatedProjectsIndexRoute: typeof AuthenticatedProjectsIndexRoute
+  AuthenticatedRolesIndexRoute: typeof AuthenticatedRolesIndexRoute
+  AuthenticatedServicesIndexRoute: typeof AuthenticatedServicesIndexRoute
+  AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
+  AuthenticatedClientsClientIdEditRoute: typeof AuthenticatedClientsClientIdEditRoute
+  AuthenticatedProjectsProjectIdEditRoute: typeof AuthenticatedProjectsProjectIdEditRoute
+  AuthenticatedRolesRoleIdEditRoute: typeof AuthenticatedRolesRoleIdEditRoute
+  AuthenticatedServicesServiceIdEditRoute: typeof AuthenticatedServicesServiceIdEditRoute
+  AuthenticatedUsersUserIdEditRoute: typeof AuthenticatedUsersUserIdEditRoute
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedClientsNewRoute: AuthenticatedClientsNewRoute,
+  AuthenticatedProjectsNewRoute: AuthenticatedProjectsNewRoute,
+  AuthenticatedRolesNewRoute: AuthenticatedRolesNewRoute,
+  AuthenticatedServicesNewRoute: AuthenticatedServicesNewRoute,
+  AuthenticatedUsersNewRoute: AuthenticatedUsersNewRoute,
+  AuthenticatedClientsIndexRoute: AuthenticatedClientsIndexRoute,
+  AuthenticatedProjectsIndexRoute: AuthenticatedProjectsIndexRoute,
+  AuthenticatedRolesIndexRoute: AuthenticatedRolesIndexRoute,
+  AuthenticatedServicesIndexRoute: AuthenticatedServicesIndexRoute,
+  AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
+  AuthenticatedClientsClientIdEditRoute: AuthenticatedClientsClientIdEditRoute,
+  AuthenticatedProjectsProjectIdEditRoute:
+    AuthenticatedProjectsProjectIdEditRoute,
+  AuthenticatedRolesRoleIdEditRoute: AuthenticatedRolesRoleIdEditRoute,
+  AuthenticatedServicesServiceIdEditRoute:
+    AuthenticatedServicesServiceIdEditRoute,
+  AuthenticatedUsersUserIdEditRoute: AuthenticatedUsersUserIdEditRoute,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '': typeof AuthenticatedRouteWithChildren
+  '/login': typeof authLoginRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/clients/new': typeof AuthenticatedClientsNewRoute
+  '/projects/new': typeof AuthenticatedProjectsNewRoute
+  '/roles/new': typeof AuthenticatedRolesNewRoute
+  '/services/new': typeof AuthenticatedServicesNewRoute
+  '/users/new': typeof AuthenticatedUsersNewRoute
+  '/clients': typeof AuthenticatedClientsIndexRoute
+  '/projects': typeof AuthenticatedProjectsIndexRoute
+  '/roles': typeof AuthenticatedRolesIndexRoute
+  '/services': typeof AuthenticatedServicesIndexRoute
+  '/users': typeof AuthenticatedUsersIndexRoute
+  '/clients/$clientId/edit': typeof AuthenticatedClientsClientIdEditRoute
+  '/projects/$projectId/edit': typeof AuthenticatedProjectsProjectIdEditRoute
+  '/roles/$roleId/edit': typeof AuthenticatedRolesRoleIdEditRoute
+  '/services/$serviceId/edit': typeof AuthenticatedServicesServiceIdEditRoute
+  '/users/$userId/edit': typeof AuthenticatedUsersUserIdEditRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '': typeof AuthenticatedRouteWithChildren
+  '/login': typeof authLoginRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/clients/new': typeof AuthenticatedClientsNewRoute
+  '/projects/new': typeof AuthenticatedProjectsNewRoute
+  '/roles/new': typeof AuthenticatedRolesNewRoute
+  '/services/new': typeof AuthenticatedServicesNewRoute
+  '/users/new': typeof AuthenticatedUsersNewRoute
+  '/clients': typeof AuthenticatedClientsIndexRoute
+  '/projects': typeof AuthenticatedProjectsIndexRoute
+  '/roles': typeof AuthenticatedRolesIndexRoute
+  '/services': typeof AuthenticatedServicesIndexRoute
+  '/users': typeof AuthenticatedUsersIndexRoute
+  '/clients/$clientId/edit': typeof AuthenticatedClientsClientIdEditRoute
+  '/projects/$projectId/edit': typeof AuthenticatedProjectsProjectIdEditRoute
+  '/roles/$roleId/edit': typeof AuthenticatedRolesRoleIdEditRoute
+  '/services/$serviceId/edit': typeof AuthenticatedServicesServiceIdEditRoute
+  '/users/$userId/edit': typeof AuthenticatedUsersUserIdEditRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/(auth)/login': typeof authLoginRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/clients/new': typeof AuthenticatedClientsNewRoute
+  '/_authenticated/projects/new': typeof AuthenticatedProjectsNewRoute
+  '/_authenticated/roles/new': typeof AuthenticatedRolesNewRoute
+  '/_authenticated/services/new': typeof AuthenticatedServicesNewRoute
+  '/_authenticated/users/new': typeof AuthenticatedUsersNewRoute
+  '/_authenticated/clients/': typeof AuthenticatedClientsIndexRoute
+  '/_authenticated/projects/': typeof AuthenticatedProjectsIndexRoute
+  '/_authenticated/roles/': typeof AuthenticatedRolesIndexRoute
+  '/_authenticated/services/': typeof AuthenticatedServicesIndexRoute
+  '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
+  '/_authenticated/clients/$clientId/edit': typeof AuthenticatedClientsClientIdEditRoute
+  '/_authenticated/projects/$projectId/edit': typeof AuthenticatedProjectsProjectIdEditRoute
+  '/_authenticated/roles/$roleId/edit': typeof AuthenticatedRolesRoleIdEditRoute
+  '/_authenticated/services/$serviceId/edit': typeof AuthenticatedServicesServiceIdEditRoute
+  '/_authenticated/users/$userId/edit': typeof AuthenticatedUsersUserIdEditRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | ''
+    | '/login'
+    | '/dashboard'
+    | '/clients/new'
+    | '/projects/new'
+    | '/roles/new'
+    | '/services/new'
+    | '/users/new'
+    | '/clients'
+    | '/projects'
+    | '/roles'
+    | '/services'
+    | '/users'
+    | '/clients/$clientId/edit'
+    | '/projects/$projectId/edit'
+    | '/roles/$roleId/edit'
+    | '/services/$serviceId/edit'
+    | '/users/$userId/edit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | ''
+    | '/login'
+    | '/dashboard'
+    | '/clients/new'
+    | '/projects/new'
+    | '/roles/new'
+    | '/services/new'
+    | '/users/new'
+    | '/clients'
+    | '/projects'
+    | '/roles'
+    | '/services'
+    | '/users'
+    | '/clients/$clientId/edit'
+    | '/projects/$projectId/edit'
+    | '/roles/$roleId/edit'
+    | '/services/$serviceId/edit'
+    | '/users/$userId/edit'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/(auth)/login'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/clients/new'
+    | '/_authenticated/projects/new'
+    | '/_authenticated/roles/new'
+    | '/_authenticated/services/new'
+    | '/_authenticated/users/new'
+    | '/_authenticated/clients/'
+    | '/_authenticated/projects/'
+    | '/_authenticated/roles/'
+    | '/_authenticated/services/'
+    | '/_authenticated/users/'
+    | '/_authenticated/clients/$clientId/edit'
+    | '/_authenticated/projects/$projectId/edit'
+    | '/_authenticated/roles/$roleId/edit'
+    | '/_authenticated/services/$serviceId/edit'
+    | '/_authenticated/users/$userId/edit'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  authLoginRoute: typeof authLoginRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  authLoginRoute: authLoginRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +497,101 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/_authenticated",
+        "/(auth)/login"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/_authenticated": {
+      "filePath": "_authenticated.tsx",
+      "children": [
+        "/_authenticated/dashboard",
+        "/_authenticated/clients/new",
+        "/_authenticated/projects/new",
+        "/_authenticated/roles/new",
+        "/_authenticated/services/new",
+        "/_authenticated/users/new",
+        "/_authenticated/clients/",
+        "/_authenticated/projects/",
+        "/_authenticated/roles/",
+        "/_authenticated/services/",
+        "/_authenticated/users/",
+        "/_authenticated/clients/$clientId/edit",
+        "/_authenticated/projects/$projectId/edit",
+        "/_authenticated/roles/$roleId/edit",
+        "/_authenticated/services/$serviceId/edit",
+        "/_authenticated/users/$userId/edit"
+      ]
+    },
+    "/(auth)/login": {
+      "filePath": "(auth)/login.tsx"
+    },
+    "/_authenticated/dashboard": {
+      "filePath": "_authenticated/dashboard.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/clients/new": {
+      "filePath": "_authenticated/clients/new.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/projects/new": {
+      "filePath": "_authenticated/projects/new.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/roles/new": {
+      "filePath": "_authenticated/roles/new.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/services/new": {
+      "filePath": "_authenticated/services/new.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/users/new": {
+      "filePath": "_authenticated/users/new.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/clients/": {
+      "filePath": "_authenticated/clients/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/projects/": {
+      "filePath": "_authenticated/projects/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/roles/": {
+      "filePath": "_authenticated/roles/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/services/": {
+      "filePath": "_authenticated/services/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/users/": {
+      "filePath": "_authenticated/users/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/clients/$clientId/edit": {
+      "filePath": "_authenticated/clients/$clientId.edit.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/projects/$projectId/edit": {
+      "filePath": "_authenticated/projects/$projectId.edit.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/roles/$roleId/edit": {
+      "filePath": "_authenticated/roles/$roleId.edit.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/services/$serviceId/edit": {
+      "filePath": "_authenticated/services/$serviceId.edit.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/users/$userId/edit": {
+      "filePath": "_authenticated/users/$userId.edit.tsx",
+      "parent": "/_authenticated"
     }
   }
 }
