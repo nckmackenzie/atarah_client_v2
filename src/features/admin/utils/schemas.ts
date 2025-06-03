@@ -4,6 +4,7 @@ import { isValidPhoneNumber } from '@/lib/utils'
 import {
   optionalNumberSchemaEntry,
   optionalStringSchemaEntry,
+  requiredNumberSchemaEntry,
   requiredStringSchemaEntry,
 } from '@/lib/schema-rules'
 
@@ -59,3 +60,11 @@ export const customerFormSchema = z
       })
     }
   })
+
+export const serviceFormSchema = z.object({
+  name: requiredStringSchemaEntry('Service name is required').toLowerCase(),
+  glAccountId: requiredStringSchemaEntry('G/L account is required'),
+  rate: requiredNumberSchemaEntry('Service rate is required'),
+  description: optionalStringSchemaEntry(),
+  active: z.boolean(),
+})
