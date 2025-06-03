@@ -47,3 +47,17 @@ export function mutationErrorHandler(error: unknown) {
   }
   return errors
 }
+
+export function formErrorHandler<T extends Record<string, any>>(
+  err: unknown,
+  setError: UseFormSetError<T>,
+  onError: (message: string) => void,
+) {
+  if (isAxiosError(err)) {
+    if (err.response?.status === 422) {
+      handleApiErrors(err.response.data.errors, setError)
+    } else {
+      onError(mutationErrorHandler(err))
+    }
+  }
+}
