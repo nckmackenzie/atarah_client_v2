@@ -1,4 +1,4 @@
-import { Link, getRouteApi, useRouter } from '@tanstack/react-router'
+import { Link, getRouteApi } from '@tanstack/react-router'
 import { createAvatar } from '@dicebear/core'
 import { initials } from '@dicebear/collection'
 import {
@@ -12,7 +12,7 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
-import type { Form } from '@/types/index.types'
+import type { Form, TRoutes } from '@/types/index.types'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -163,7 +163,6 @@ function UserAvatar() {
 }
 
 function Navigation({ forms }: { forms: Array<Form> }) {
-  const router = useRouter()
   const groupedModules = forms.reduce<
     Record<string, Array<{ title: string; url: string }>>
   >((acc, curr) => {
@@ -209,14 +208,17 @@ function Navigation({ forms }: { forms: Array<Form> }) {
                         asChild
                         className="text-xs font-medium text-muted-foreground"
                       >
-                        <button
+                        <Link to={`/${subItem.url}` as TRoutes}>
+                          {subItem.title}
+                        </Link>
+                        {/* <button
                           onClick={() =>
                             router.navigate({ to: `/${subItem.url}` })
                           }
                           className="w-full text-left"
                         >
                           <span className="capitalize">{subItem.title}</span>
-                        </button>
+                        </button> */}
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   ))}
