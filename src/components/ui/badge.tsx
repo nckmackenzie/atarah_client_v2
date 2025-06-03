@@ -20,7 +20,7 @@ const badgeVariants = cva(
           'text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground',
         success: 'border-transparent bg-success text-success-foreground',
         warning: 'border-transparent bg-warning text-warning-foreground',
-        error: 'border-transparent bg-danger text-danger-foreground',
+        error: 'border-transparent bg-error text-error-foreground',
         info: 'border-transparent bg-info text-info-foreground',
       },
     },
