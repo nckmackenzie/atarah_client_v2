@@ -1,6 +1,7 @@
 import type { z } from 'zod'
 import type {
   customerFormSchema,
+  projectFormSchema,
   roleFormSchema,
   serviceFormSchema,
   usersFormSchema,
@@ -45,3 +46,6 @@ export type Service = WithId &
   Omit<ServiceFormValues, 'glAccountId'> & {
     account: WithIdAndName
   }
+
+export type ProjectFormValues = z.infer<typeof projectFormSchema>
+export type Project = WithId & WithCreatedAt & ProjectFormValues

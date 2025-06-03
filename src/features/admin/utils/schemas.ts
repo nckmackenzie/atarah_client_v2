@@ -68,3 +68,9 @@ export const serviceFormSchema = z.object({
   description: optionalStringSchemaEntry(),
   active: z.boolean(),
 })
+
+export const projectFormSchema = z.object({
+  name: requiredStringSchemaEntry('Project name is required').toLowerCase(),
+  description: optionalStringSchemaEntry(),
+  active: z.boolean(),
+})
