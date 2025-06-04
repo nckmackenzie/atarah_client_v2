@@ -94,6 +94,26 @@ export function createListQuery<T>(
     })
 }
 
+export function createListQueryWithObjectParams<T>(
+  resource: string | Array<string>,
+  endpoint: string,
+) {
+  return (q?: Record<string, string | number | boolean | undefined | null>) =>
+    queryOptions({
+      queryKey: Array.isArray(resource) ? resource : [resource, { ...q }],
+      queryFn: async (): Promise<{ data: Array<T> }> => {
+        const params = searchParamsToObject({ ...q })
+        try {
+          const { data } = await axios(`${endpoint}?${params.toString()}`)
+          return data
+        } catch (err) {
+          const error = mutationErrorHandler(err)
+          throw new Error(error)
+        }
+      },
+    })
+}
+
 export function createDetailQuery<T>(
   resource: string | Array<string>,
   endpoint: string,
