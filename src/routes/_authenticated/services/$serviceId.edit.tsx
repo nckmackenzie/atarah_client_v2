@@ -16,7 +16,7 @@ export const Route = createFileRoute(
       context.queryClient.ensureQueryData(
         serviceQueryOptions.service(serviceId),
       ),
-      context.queryClient.ensureQueryData(accountsQueryOptions.all()),
+      context.queryClient.ensureQueryData(accountsQueryOptions.min()),
     ]),
   component: EditServiceRouteComponent,
   pendingComponent: () => <FormLoader />,
@@ -34,7 +34,7 @@ function EditServiceRouteComponent() {
       />
       <ServiceForm
         accounts={transformOptions(
-          accounts.data.filter((acc) => acc.parentId !== null),
+          accounts.data.filter((acc) => acc.parentId !== null && acc.active),
         )}
         service={service.data}
       />

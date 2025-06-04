@@ -9,7 +9,7 @@ import FormHeader from '@/components/custom/form-header'
 
 export const Route = createFileRoute('/_authenticated/services/new')({
   loader: async ({ context }) =>
-    await context.queryClient.ensureQueryData(accountsQueryOptions.all()),
+    await context.queryClient.ensureQueryData(accountsQueryOptions.min()),
 
   component: NewServiceComponent,
   pendingComponent: () => <FormLoader />,
@@ -26,7 +26,9 @@ function NewServiceComponent() {
         description="Fill in all the required details"
       />
       <ServiceForm
-        accounts={transformOptions(data.filter((acc) => acc.parentId !== null))}
+        accounts={transformOptions(
+          data.filter((acc) => acc.parentId !== null && acc.active),
+        )}
       />
     </div>
   )
