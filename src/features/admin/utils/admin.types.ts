@@ -37,7 +37,9 @@ export type SingleRole = Omit<Role, 'usersCount' | 'rights'> & {
 export type ClientFormValues = z.infer<typeof customerFormSchema>
 export type Client = WithId &
   WithCreatedAt &
-  Omit<ClientFormValues, 'openingBalanceDate' | 'openingBalance'>
+  Omit<ClientFormValues, 'openingBalanceDate' | 'openingBalance'> & {
+    totalInvoiced: number
+  }
 
 export type ServiceFormValues = z.infer<typeof serviceFormSchema>
 
