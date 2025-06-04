@@ -15,6 +15,8 @@ import { EditAction } from '@/components/custom/custom-button'
 import { AdminGuard } from '@/components/custom/admin-guard'
 import { DeletePrompt } from '@/components/custom/delete-prompt'
 import { deleteClient } from '@/features/admin/services/api'
+import { Badge } from '@/components/ui/badge'
+import { numberFormat } from '@/lib/formatters'
 
 interface ClientsDatatableProps {
   clients: Array<Client>
@@ -41,9 +43,14 @@ function ClientsDatatable({ clients }: ClientsDatatableProps) {
       ),
     },
     {
-      accessorKey: 'taxPin',
+      accessorKey: 'totalInvoiced',
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Tax Pin" />
+        <DataTableColumnHeader column={column} title="Total Invoiced" />
+      ),
+      cell: ({ row }) => (
+        <Badge variant="secondary">
+          Ksh {numberFormat(row.original.totalInvoiced)}
+        </Badge>
       ),
     },
     {
