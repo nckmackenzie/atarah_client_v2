@@ -80,7 +80,7 @@ export function createListQuery<T>(
 ) {
   return (q?: string) =>
     queryOptions({
-      queryKey: [resource, { q }],
+      queryKey: Array.isArray(resource) ? resource : [resource, { q }],
       queryFn: async (): Promise<{ data: Array<T> }> => {
         const params = searchParamsToObject({ q })
         try {
