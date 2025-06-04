@@ -74,7 +74,10 @@ export function successHandler(
   router.navigate({ to: redirectTo })
 }
 
-export function createListQuery<T>(resource: string, endpoint: string) {
+export function createListQuery<T>(
+  resource: string | Array<string>,
+  endpoint: string,
+) {
   return (q?: string) =>
     queryOptions({
       queryKey: [resource, { q }],
@@ -91,7 +94,10 @@ export function createListQuery<T>(resource: string, endpoint: string) {
     })
 }
 
-export function createDetailQuery<T>(resource: string, endpoint: string) {
+export function createDetailQuery<T>(
+  resource: string | Array<string>,
+  endpoint: string,
+) {
   return (id: string) =>
     queryOptions({
       queryKey: [resource, id],
