@@ -201,7 +201,7 @@ code {
 }
 
 .form-grid {
-  @apply grid gap-6 sm:grid-cols-12;
+  @apply grid gap-6 sm:grid-cols-12 items-start;
 }
 
 .col-6 {
