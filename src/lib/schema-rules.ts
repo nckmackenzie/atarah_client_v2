@@ -1,7 +1,10 @@
 import { z } from 'zod'
 
 export const paymentMethodSchemaEntry = () =>
-  z.enum(['cash', 'mpesa', 'bank']).default('mpesa')
+  z.enum(['cash', 'mpesa', 'bank'], {
+    required_error: 'Select payment method',
+    invalid_type_error: 'Select a payment method',
+  })
 
 export const paymentReferenceSchemaEntry = () =>
   z.string().trim().min(1, { message: 'Reference is required' }).toLowerCase()
