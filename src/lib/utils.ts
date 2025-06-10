@@ -22,6 +22,10 @@ export const PAYMENT_METHOD: Array<Option> = [
     value: 'cheque',
     label: 'Cheque',
   },
+  {
+    value: 'bank',
+    label: 'Bank',
+  },
 ]
 
 export function cn(...inputs: Array<ClassValue>) {

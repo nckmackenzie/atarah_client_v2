@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export const paymentMethodSchemaEntry = () =>
-  z.enum(['cash', 'mpesa', 'cheque'], {
+  z.enum(['cash', 'mpesa', 'cheque', 'bank'], {
     required_error: 'Select payment method',
     invalid_type_error: 'Select a payment method',
   })
