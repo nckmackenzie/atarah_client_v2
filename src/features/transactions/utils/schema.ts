@@ -90,3 +90,19 @@ export const invoicePaymentFormSchema = z
       })
     }
   })
+
+export const invoiceBulkPaymentFormSchema = z.object({
+  clientId: requiredStringSchemaEntry('Client is required'),
+  paymentDate: requiredDateSchemaEntry(),
+  paymentMethod: paymentMethodSchemaEntry(),
+  paymentReference: paymentReferenceSchemaEntry(),
+  invoices: z.array(
+    z.object({
+      invoiceId: requiredStringSchemaEntry(),
+      invoiceDate: requiredStringSchemaEntry(),
+      invoiceNo: requiredStringSchemaEntry(),
+      invoiceAmount: requiredStringSchemaEntry(),
+      amount: z.coerce.number(),
+    }),
+  ),
+})
