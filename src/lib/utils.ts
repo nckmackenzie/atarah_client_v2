@@ -120,7 +120,7 @@ export function createDetailQuery<T>(
 ) {
   return (id: string) =>
     queryOptions({
-      queryKey: [resource, id],
+      queryKey: Array.isArray(resource) ? [...resource, id] : [resource, id],
       queryFn: async (): Promise<{ data: T }> => {
         try {
           const { data } = await axios(`${endpoint}/${id}`)
