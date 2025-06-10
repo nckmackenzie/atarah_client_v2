@@ -2,6 +2,7 @@ import type { z } from 'zod'
 import type { WithCreatedAt, WithId, WithIdAndName } from '@/types/index.types'
 import type {
   accountsFormSchema,
+  invoiceBulkPaymentFormSchema,
   invoiceFormSchema,
   invoicePaymentFormSchema,
 } from '@/features/transactions/utils/schema'
@@ -64,3 +65,15 @@ export interface InvoiceWithDetails extends Invoice {
 
 export type InvoiceFormValues = z.infer<typeof invoiceFormSchema>
 export type InvoicePaymentFormValues = z.infer<typeof invoicePaymentFormSchema>
+export type InvoicePaymentBulkFormValues = z.infer<
+  typeof invoiceBulkPaymentFormSchema
+>
+
+export type InvoicePayment = WithId &
+  Omit<InvoicePaymentFormValues, 'invoiceId'> & {
+    amount: string
+    invoiceNo: string
+    invoiceDate: string
+    totalAmount: string
+    clientName: string
+  }
