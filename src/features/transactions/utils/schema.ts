@@ -8,6 +8,7 @@ import {
   requiredNumberSchemaEntry,
   requiredStringSchemaEntry,
 } from '@/lib/schema-rules'
+import { ACCEPTED_FILE_TYPES, MAX_FILE_SIZE } from '@/lib/utils'
 
 export const accountsFormSchema = z
   .object({
@@ -106,3 +107,53 @@ export const invoiceBulkPaymentFormSchema = z.object({
     }),
   ),
 })
+
+export const expenseFormSchema = z.object({
+  expenseDate: requiredDateSchemaEntry(),
+  payee: requiredStringSchemaEntry('Payee is required').toLowerCase(),
+  paymentMethod: paymentMethodSchemaEntry(),
+  paymentReference: requiredStringSchemaEntry('Payment reference is required'),
+  details: z.array(
+    z.object({
+      id: z.string(),
+      glAccountId: requiredStringSchemaEntry('Account is required'),
+      projectId: optionalStringSchemaEntry(),
+      amount: requiredNumberSchemaEntry('Enter valid amount'),
+      description: optionalStringSchemaEntry(),
+    }),
+  ),
+  attachments: z
+    .array(
+      z
+        .any()
+        .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
+        .refine(
+          (file) => ACCEPTED_FILE_TYPES.includes(file?.type),
+          'Only .jpg, .jpeg, .png, .webp and .pdf formats are supported.',
+        ),
+    )
+    .optional(),
+})
+// .superRefine(({ paymentReference, paymentMethod }, ctx) => {
+//   if (paymentMethod === 'mpesa' && !paymentReference) {
+//     ctx.addIssue({
+//       code: z.ZodIssueCode.custom,
+//       message: 'Enter Mpesa reference',
+//       path: ['paymentReference'],
+//     });
+//   }
+//   if (paymentMethod === 'cheque' && !paymentReference) {
+//     ctx.addIssue({
+//       code: z.ZodIssueCode.custom,
+//       message: 'Enter cheque no...',
+//       path: ['paymentReference'],
+//     });
+//   }
+//   if (paymentMethod === 'bank' && !paymentReference) {
+//     ctx.addIssue({
+//       code: z.ZodIssueCode.custom,
+//       message: 'Enter payment details',
+//       path: ['paymentReference'],
+//     });
+//   }
+// });
