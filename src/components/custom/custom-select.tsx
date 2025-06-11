@@ -37,7 +37,10 @@ export default function CustomSelect({
     >
       <FormControl>
         <SelectTrigger
-          className={cn('w-full', hasError && 'border border-destructive')}
+          className={cn(
+            'w-full overflow-hidden whitespace-nowrap truncate',
+            hasError && 'border border-destructive',
+          )}
           value={value}
         >
           <SelectValue placeholder={placeholder} />
