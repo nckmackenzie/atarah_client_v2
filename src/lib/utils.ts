@@ -28,6 +28,15 @@ export const PAYMENT_METHOD: Array<Option> = [
   },
 ]
 
+export const MAX_FILE_SIZE = 5000000
+export const ACCEPTED_FILE_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+  'application/pdf',
+]
+
 export function cn(...inputs: Array<ClassValue>) {
   return twMerge(clsx(inputs))
 }
