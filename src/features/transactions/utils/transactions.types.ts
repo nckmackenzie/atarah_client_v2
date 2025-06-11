@@ -1,7 +1,13 @@
 import type { z } from 'zod'
-import type { WithCreatedAt, WithId, WithIdAndName } from '@/types/index.types'
+import type {
+  PaymentMethod,
+  WithCreatedAt,
+  WithId,
+  WithIdAndName,
+} from '@/types/index.types'
 import type {
   accountsFormSchema,
+  expenseFormSchema,
   invoiceBulkPaymentFormSchema,
   invoiceFormSchema,
   invoicePaymentFormSchema,
@@ -24,8 +30,8 @@ export interface Account extends WithIdAndName {
 
 export type AccountMin = WithIdAndName &
   WithCreatedAt & {
-    parentId: string | null
-    accountTypeId: string | null
+    parentId: string
+    accountTypeId: string
     isSubcategory: boolean
     isBank: false
     accountNo: string | null
@@ -77,3 +83,28 @@ export type InvoicePayment = WithId &
     totalAmount: string
     clientName: string
   }
+
+export type ExpenseFormValues = z.infer<typeof expenseFormSchema>
+
+export type ExpenseDetail = {
+  id: number
+  amount: string
+  description: string | null
+  project: WithIdAndName | null
+  account: WithIdAndName
+}
+
+export type Expense = WithId &
+  WithCreatedAt & {
+    expenseDate: string
+    expenseNo: number
+    payee: string
+    paymentMethod: PaymentMethod
+    paymentReference: string | null
+    expenseTotal: string
+    details: Array<ExpenseDetail>
+  }
+
+export interface ExpenseWithAttachments extends Expense {
+  attachments: Array<{ id: number; fileUrl: string }> | null
+}
