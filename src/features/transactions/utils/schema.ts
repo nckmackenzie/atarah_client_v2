@@ -157,3 +157,27 @@ export const expenseFormSchema = z.object({
 //     });
 //   }
 // });
+
+export const journalFormSchema = z.object({
+  transactionDate: requiredDateSchemaEntry(),
+  details: z.array(
+    z
+      .object({
+        id: requiredStringSchemaEntry(),
+        glAccountId: requiredStringSchemaEntry('Account is required'),
+        debit: optionalNumberSchemaEntry(),
+        credit: optionalNumberSchemaEntry(),
+        description: optionalStringSchemaEntry(),
+      })
+      .refine(
+        (data) => {
+          const { debit, credit } = data
+          const isDebit = debit && debit > 0
+          const isCredit = credit && credit > 0
+          const isValid = isDebit || isCredit
+          return isValid
+        },
+        { message: 'Either debit or credit must be provided' },
+      ),
+  ),
+})
