@@ -4,8 +4,11 @@ import type {
   InvoiceFormValues,
   InvoicePaymentBulkFormValues,
   InvoicePaymentFormValues,
+  JournalEntry,
+  JournalFormValues,
 } from '@/features/transactions/utils/transactions.types'
 import axios from '@/lib/api/axios'
+import { mutationErrorHandler } from '@/lib/error-handlers'
 import { dateFormat } from '@/lib/formatters'
 import { createResource, deleteResource, updateResource } from '@/lib/utils'
 
@@ -99,4 +102,46 @@ export async function updateExpense(
 
 export async function deleteExpense(id: string) {
   await deleteResource('expenses', id)
+}
+
+export async function fetchJournalNo(): Promise<{ data: number }> {
+  try {
+    const { data } = await axios(`/api/journal-entries/get-no`)
+    return data
+  } catch (error) {
+    console.log(error)
+    throw new Error('Unable to fetch journal no')
+  }
+}
+
+export async function createEntry(
+  data: JournalFormValues,
+  transactionId?: string,
+) {
+  if (transactionId) {
+    await axios.patch(`/api/journal-entries/${transactionId}`, data)
+  } else {
+    await axios.post(`/api/journal-entries`, data)
+  }
+}
+
+export async function fetchJournal(
+  journalNo: string,
+): Promise<{ data: JournalEntry }> {
+  try {
+    const { data } = await axios(`/api/journal-entries/${journalNo}`)
+    return data
+  } catch (error) {
+    const err = mutationErrorHandler(error)
+    throw new Error(err)
+  }
+}
+
+export async function deleteEntry(transactionId: string) {
+  try {
+    await axios.delete(`/api/journal-entries/${transactionId}`)
+  } catch (error) {
+    const err = mutationErrorHandler(error)
+    throw new Error(err)
+  }
 }
