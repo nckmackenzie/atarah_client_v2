@@ -44,3 +44,19 @@ export function FormLoader() {
     </div>
   )
 }
+
+export function ReportLoader() {
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+        <Skeleton className="h-10 w-44" />
+        <Skeleton className="h-10 w-44" />
+      </div>
+
+      <TableSkeleton
+        rowCount={10}
+        columnWidths={['w-36', 'w-24', 'w-56', 'w-44', 'w-24', 'w-32']}
+      />
+    </div>
+  )
+}
