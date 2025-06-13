@@ -8,6 +8,7 @@ import type {
   Invoice,
   InvoicePayment,
   InvoiceWithDetails,
+  JournalEntry,
 } from '@/features/transactions/utils/transactions.types'
 import axios from '@/lib/api/axios'
 import { mutationErrorHandler } from '@/lib/error-handlers'
@@ -64,7 +65,6 @@ export const pendingInvoiceByClientQueryOptions = (clientId: string) =>
 
 export const expenseQueryOptions = {
   all: createListQuery<Expense>('expenses', '/api/expenses'),
-  // expenseNo: createListQuery<number>('expenses', '/api/expenses/expense-no'),
   expenseNo: () =>
     queryOptions({
       queryKey: ['expenses', 'expense no'],
@@ -81,5 +81,25 @@ export const expenseQueryOptions = {
   expense: createDetailQuery<ExpenseWithAttachments>(
     'expenses',
     '/api/expenses',
+  ),
+}
+
+export const journalQueryOptions = {
+  journalNo: () =>
+    queryOptions({
+      queryKey: ['journal entries', 'journal no'],
+      queryFn: async (): Promise<{ data: number }> => {
+        try {
+          const { data } = await axios('/api/journal-entries/journal-no')
+          return data
+        } catch (err) {
+          const error = mutationErrorHandler(err)
+          throw new Error(error)
+        }
+      },
+    }),
+  journal: createDetailQuery<JournalEntry>(
+    'journal entries',
+    '/api/journal-entries',
   ),
 }
