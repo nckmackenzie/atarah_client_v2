@@ -11,6 +11,7 @@ import type {
   invoiceBulkPaymentFormSchema,
   invoiceFormSchema,
   invoicePaymentFormSchema,
+  journalFormSchema,
 } from '@/features/transactions/utils/schema'
 
 type AccountType =
@@ -107,4 +108,20 @@ export type Expense = WithId &
 
 export interface ExpenseWithAttachments extends Expense {
   attachments: Array<{ id: number; fileUrl: string }> | null
+}
+
+export type JournalFormValues = z.infer<typeof journalFormSchema>
+
+export interface JournalEntry {
+  id: number
+  journalNo: number
+  transactionDate: Date
+  transactionId: string
+  details: Array<{
+    id: number
+    account: WithIdAndName
+    debit: number
+    credit: number
+    description: string | null
+  }>
 }
