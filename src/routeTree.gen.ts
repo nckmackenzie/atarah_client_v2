@@ -19,17 +19,31 @@ import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/
 import { Route as AuthenticatedServicesIndexImport } from './routes/_authenticated/services/index'
 import { Route as AuthenticatedRolesIndexImport } from './routes/_authenticated/roles/index'
 import { Route as AuthenticatedProjectsIndexImport } from './routes/_authenticated/projects/index'
+import { Route as AuthenticatedJournalEntriesIndexImport } from './routes/_authenticated/journal-entries/index'
+import { Route as AuthenticatedInvoicesIndexImport } from './routes/_authenticated/invoices/index'
+import { Route as AuthenticatedExpensesIndexImport } from './routes/_authenticated/expenses/index'
 import { Route as AuthenticatedClientsIndexImport } from './routes/_authenticated/clients/index'
+import { Route as AuthenticatedChartOfAccountsIndexImport } from './routes/_authenticated/chart-of-accounts/index'
 import { Route as AuthenticatedUsersNewImport } from './routes/_authenticated/users/new'
 import { Route as AuthenticatedServicesNewImport } from './routes/_authenticated/services/new'
 import { Route as AuthenticatedRolesNewImport } from './routes/_authenticated/roles/new'
 import { Route as AuthenticatedProjectsNewImport } from './routes/_authenticated/projects/new'
+import { Route as AuthenticatedInvoicesNewImport } from './routes/_authenticated/invoices/new'
+import { Route as AuthenticatedExpensesNewImport } from './routes/_authenticated/expenses/new'
 import { Route as AuthenticatedClientsNewImport } from './routes/_authenticated/clients/new'
+import { Route as AuthenticatedChartOfAccountsNewImport } from './routes/_authenticated/chart-of-accounts/new'
+import { Route as AuthenticatedInvoicesPaymentsIndexImport } from './routes/_authenticated/invoices/payments/index'
 import { Route as AuthenticatedUsersUserIdEditImport } from './routes/_authenticated/users/$userId.edit'
 import { Route as AuthenticatedServicesServiceIdEditImport } from './routes/_authenticated/services/$serviceId.edit'
 import { Route as AuthenticatedRolesRoleIdEditImport } from './routes/_authenticated/roles/$roleId.edit'
 import { Route as AuthenticatedProjectsProjectIdEditImport } from './routes/_authenticated/projects/$projectId.edit'
+import { Route as AuthenticatedInvoicesPaymentsNewImport } from './routes/_authenticated/invoices/payments/new'
+import { Route as AuthenticatedInvoicesInvoiceIdPrintImport } from './routes/_authenticated/invoices/$invoiceId.print'
+import { Route as AuthenticatedInvoicesInvoiceIdEditImport } from './routes/_authenticated/invoices/$invoiceId.edit'
+import { Route as AuthenticatedExpensesExpenseIdEditImport } from './routes/_authenticated/expenses/$expenseId.edit'
 import { Route as AuthenticatedClientsClientIdEditImport } from './routes/_authenticated/clients/$clientId.edit'
+import { Route as AuthenticatedChartOfAccountsAccountIdEditImport } from './routes/_authenticated/chart-of-accounts/$accountId.edit'
+import { Route as AuthenticatedInvoicesPaymentsPaymentIdEditImport } from './routes/_authenticated/invoices/payments/$paymentId.edit'
 
 // Create/Update Routes
 
@@ -84,11 +98,41 @@ const AuthenticatedProjectsIndexRoute = AuthenticatedProjectsIndexImport.update(
   } as any,
 )
 
+const AuthenticatedJournalEntriesIndexRoute =
+  AuthenticatedJournalEntriesIndexImport.update({
+    id: '/journal-entries/',
+    path: '/journal-entries/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedInvoicesIndexRoute = AuthenticatedInvoicesIndexImport.update(
+  {
+    id: '/invoices/',
+    path: '/invoices/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any,
+)
+
+const AuthenticatedExpensesIndexRoute = AuthenticatedExpensesIndexImport.update(
+  {
+    id: '/expenses/',
+    path: '/expenses/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any,
+)
+
 const AuthenticatedClientsIndexRoute = AuthenticatedClientsIndexImport.update({
   id: '/clients/',
   path: '/clients/',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+
+const AuthenticatedChartOfAccountsIndexRoute =
+  AuthenticatedChartOfAccountsIndexImport.update({
+    id: '/chart-of-accounts/',
+    path: '/chart-of-accounts/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 const AuthenticatedUsersNewRoute = AuthenticatedUsersNewImport.update({
   id: '/users/new',
@@ -114,11 +158,37 @@ const AuthenticatedProjectsNewRoute = AuthenticatedProjectsNewImport.update({
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
+const AuthenticatedInvoicesNewRoute = AuthenticatedInvoicesNewImport.update({
+  id: '/invoices/new',
+  path: '/invoices/new',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedExpensesNewRoute = AuthenticatedExpensesNewImport.update({
+  id: '/expenses/new',
+  path: '/expenses/new',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
 const AuthenticatedClientsNewRoute = AuthenticatedClientsNewImport.update({
   id: '/clients/new',
   path: '/clients/new',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+
+const AuthenticatedChartOfAccountsNewRoute =
+  AuthenticatedChartOfAccountsNewImport.update({
+    id: '/chart-of-accounts/new',
+    path: '/chart-of-accounts/new',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedInvoicesPaymentsIndexRoute =
+  AuthenticatedInvoicesPaymentsIndexImport.update({
+    id: '/invoices/payments/',
+    path: '/invoices/payments/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 const AuthenticatedUsersUserIdEditRoute =
   AuthenticatedUsersUserIdEditImport.update({
@@ -148,10 +218,52 @@ const AuthenticatedProjectsProjectIdEditRoute =
     getParentRoute: () => AuthenticatedRoute,
   } as any)
 
+const AuthenticatedInvoicesPaymentsNewRoute =
+  AuthenticatedInvoicesPaymentsNewImport.update({
+    id: '/invoices/payments/new',
+    path: '/invoices/payments/new',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedInvoicesInvoiceIdPrintRoute =
+  AuthenticatedInvoicesInvoiceIdPrintImport.update({
+    id: '/invoices/$invoiceId/print',
+    path: '/invoices/$invoiceId/print',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedInvoicesInvoiceIdEditRoute =
+  AuthenticatedInvoicesInvoiceIdEditImport.update({
+    id: '/invoices/$invoiceId/edit',
+    path: '/invoices/$invoiceId/edit',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedExpensesExpenseIdEditRoute =
+  AuthenticatedExpensesExpenseIdEditImport.update({
+    id: '/expenses/$expenseId/edit',
+    path: '/expenses/$expenseId/edit',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
 const AuthenticatedClientsClientIdEditRoute =
   AuthenticatedClientsClientIdEditImport.update({
     id: '/clients/$clientId/edit',
     path: '/clients/$clientId/edit',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedChartOfAccountsAccountIdEditRoute =
+  AuthenticatedChartOfAccountsAccountIdEditImport.update({
+    id: '/chart-of-accounts/$accountId/edit',
+    path: '/chart-of-accounts/$accountId/edit',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedInvoicesPaymentsPaymentIdEditRoute =
+  AuthenticatedInvoicesPaymentsPaymentIdEditImport.update({
+    id: '/invoices/payments/$paymentId/edit',
+    path: '/invoices/payments/$paymentId/edit',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
 
@@ -187,11 +299,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardImport
       parentRoute: typeof AuthenticatedImport
     }
+    '/_authenticated/chart-of-accounts/new': {
+      id: '/_authenticated/chart-of-accounts/new'
+      path: '/chart-of-accounts/new'
+      fullPath: '/chart-of-accounts/new'
+      preLoaderRoute: typeof AuthenticatedChartOfAccountsNewImport
+      parentRoute: typeof AuthenticatedImport
+    }
     '/_authenticated/clients/new': {
       id: '/_authenticated/clients/new'
       path: '/clients/new'
       fullPath: '/clients/new'
       preLoaderRoute: typeof AuthenticatedClientsNewImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/expenses/new': {
+      id: '/_authenticated/expenses/new'
+      path: '/expenses/new'
+      fullPath: '/expenses/new'
+      preLoaderRoute: typeof AuthenticatedExpensesNewImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/invoices/new': {
+      id: '/_authenticated/invoices/new'
+      path: '/invoices/new'
+      fullPath: '/invoices/new'
+      preLoaderRoute: typeof AuthenticatedInvoicesNewImport
       parentRoute: typeof AuthenticatedImport
     }
     '/_authenticated/projects/new': {
@@ -222,11 +355,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUsersNewImport
       parentRoute: typeof AuthenticatedImport
     }
+    '/_authenticated/chart-of-accounts/': {
+      id: '/_authenticated/chart-of-accounts/'
+      path: '/chart-of-accounts'
+      fullPath: '/chart-of-accounts'
+      preLoaderRoute: typeof AuthenticatedChartOfAccountsIndexImport
+      parentRoute: typeof AuthenticatedImport
+    }
     '/_authenticated/clients/': {
       id: '/_authenticated/clients/'
       path: '/clients'
       fullPath: '/clients'
       preLoaderRoute: typeof AuthenticatedClientsIndexImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/expenses/': {
+      id: '/_authenticated/expenses/'
+      path: '/expenses'
+      fullPath: '/expenses'
+      preLoaderRoute: typeof AuthenticatedExpensesIndexImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/invoices/': {
+      id: '/_authenticated/invoices/'
+      path: '/invoices'
+      fullPath: '/invoices'
+      preLoaderRoute: typeof AuthenticatedInvoicesIndexImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/journal-entries/': {
+      id: '/_authenticated/journal-entries/'
+      path: '/journal-entries'
+      fullPath: '/journal-entries'
+      preLoaderRoute: typeof AuthenticatedJournalEntriesIndexImport
       parentRoute: typeof AuthenticatedImport
     }
     '/_authenticated/projects/': {
@@ -257,11 +418,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUsersIndexImport
       parentRoute: typeof AuthenticatedImport
     }
+    '/_authenticated/chart-of-accounts/$accountId/edit': {
+      id: '/_authenticated/chart-of-accounts/$accountId/edit'
+      path: '/chart-of-accounts/$accountId/edit'
+      fullPath: '/chart-of-accounts/$accountId/edit'
+      preLoaderRoute: typeof AuthenticatedChartOfAccountsAccountIdEditImport
+      parentRoute: typeof AuthenticatedImport
+    }
     '/_authenticated/clients/$clientId/edit': {
       id: '/_authenticated/clients/$clientId/edit'
       path: '/clients/$clientId/edit'
       fullPath: '/clients/$clientId/edit'
       preLoaderRoute: typeof AuthenticatedClientsClientIdEditImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/expenses/$expenseId/edit': {
+      id: '/_authenticated/expenses/$expenseId/edit'
+      path: '/expenses/$expenseId/edit'
+      fullPath: '/expenses/$expenseId/edit'
+      preLoaderRoute: typeof AuthenticatedExpensesExpenseIdEditImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/invoices/$invoiceId/edit': {
+      id: '/_authenticated/invoices/$invoiceId/edit'
+      path: '/invoices/$invoiceId/edit'
+      fullPath: '/invoices/$invoiceId/edit'
+      preLoaderRoute: typeof AuthenticatedInvoicesInvoiceIdEditImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/invoices/$invoiceId/print': {
+      id: '/_authenticated/invoices/$invoiceId/print'
+      path: '/invoices/$invoiceId/print'
+      fullPath: '/invoices/$invoiceId/print'
+      preLoaderRoute: typeof AuthenticatedInvoicesInvoiceIdPrintImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/invoices/payments/new': {
+      id: '/_authenticated/invoices/payments/new'
+      path: '/invoices/payments/new'
+      fullPath: '/invoices/payments/new'
+      preLoaderRoute: typeof AuthenticatedInvoicesPaymentsNewImport
       parentRoute: typeof AuthenticatedImport
     }
     '/_authenticated/projects/$projectId/edit': {
@@ -292,6 +488,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUsersUserIdEditImport
       parentRoute: typeof AuthenticatedImport
     }
+    '/_authenticated/invoices/payments/': {
+      id: '/_authenticated/invoices/payments/'
+      path: '/invoices/payments'
+      fullPath: '/invoices/payments'
+      preLoaderRoute: typeof AuthenticatedInvoicesPaymentsIndexImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/invoices/payments/$paymentId/edit': {
+      id: '/_authenticated/invoices/payments/$paymentId/edit'
+      path: '/invoices/payments/$paymentId/edit'
+      fullPath: '/invoices/payments/$paymentId/edit'
+      preLoaderRoute: typeof AuthenticatedInvoicesPaymentsPaymentIdEditImport
+      parentRoute: typeof AuthenticatedImport
+    }
   }
 }
 
@@ -299,42 +509,77 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedChartOfAccountsNewRoute: typeof AuthenticatedChartOfAccountsNewRoute
   AuthenticatedClientsNewRoute: typeof AuthenticatedClientsNewRoute
+  AuthenticatedExpensesNewRoute: typeof AuthenticatedExpensesNewRoute
+  AuthenticatedInvoicesNewRoute: typeof AuthenticatedInvoicesNewRoute
   AuthenticatedProjectsNewRoute: typeof AuthenticatedProjectsNewRoute
   AuthenticatedRolesNewRoute: typeof AuthenticatedRolesNewRoute
   AuthenticatedServicesNewRoute: typeof AuthenticatedServicesNewRoute
   AuthenticatedUsersNewRoute: typeof AuthenticatedUsersNewRoute
+  AuthenticatedChartOfAccountsIndexRoute: typeof AuthenticatedChartOfAccountsIndexRoute
   AuthenticatedClientsIndexRoute: typeof AuthenticatedClientsIndexRoute
+  AuthenticatedExpensesIndexRoute: typeof AuthenticatedExpensesIndexRoute
+  AuthenticatedInvoicesIndexRoute: typeof AuthenticatedInvoicesIndexRoute
+  AuthenticatedJournalEntriesIndexRoute: typeof AuthenticatedJournalEntriesIndexRoute
   AuthenticatedProjectsIndexRoute: typeof AuthenticatedProjectsIndexRoute
   AuthenticatedRolesIndexRoute: typeof AuthenticatedRolesIndexRoute
   AuthenticatedServicesIndexRoute: typeof AuthenticatedServicesIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
+  AuthenticatedChartOfAccountsAccountIdEditRoute: typeof AuthenticatedChartOfAccountsAccountIdEditRoute
   AuthenticatedClientsClientIdEditRoute: typeof AuthenticatedClientsClientIdEditRoute
+  AuthenticatedExpensesExpenseIdEditRoute: typeof AuthenticatedExpensesExpenseIdEditRoute
+  AuthenticatedInvoicesInvoiceIdEditRoute: typeof AuthenticatedInvoicesInvoiceIdEditRoute
+  AuthenticatedInvoicesInvoiceIdPrintRoute: typeof AuthenticatedInvoicesInvoiceIdPrintRoute
+  AuthenticatedInvoicesPaymentsNewRoute: typeof AuthenticatedInvoicesPaymentsNewRoute
   AuthenticatedProjectsProjectIdEditRoute: typeof AuthenticatedProjectsProjectIdEditRoute
   AuthenticatedRolesRoleIdEditRoute: typeof AuthenticatedRolesRoleIdEditRoute
   AuthenticatedServicesServiceIdEditRoute: typeof AuthenticatedServicesServiceIdEditRoute
   AuthenticatedUsersUserIdEditRoute: typeof AuthenticatedUsersUserIdEditRoute
+  AuthenticatedInvoicesPaymentsIndexRoute: typeof AuthenticatedInvoicesPaymentsIndexRoute
+  AuthenticatedInvoicesPaymentsPaymentIdEditRoute: typeof AuthenticatedInvoicesPaymentsPaymentIdEditRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedChartOfAccountsNewRoute: AuthenticatedChartOfAccountsNewRoute,
   AuthenticatedClientsNewRoute: AuthenticatedClientsNewRoute,
+  AuthenticatedExpensesNewRoute: AuthenticatedExpensesNewRoute,
+  AuthenticatedInvoicesNewRoute: AuthenticatedInvoicesNewRoute,
   AuthenticatedProjectsNewRoute: AuthenticatedProjectsNewRoute,
   AuthenticatedRolesNewRoute: AuthenticatedRolesNewRoute,
   AuthenticatedServicesNewRoute: AuthenticatedServicesNewRoute,
   AuthenticatedUsersNewRoute: AuthenticatedUsersNewRoute,
+  AuthenticatedChartOfAccountsIndexRoute:
+    AuthenticatedChartOfAccountsIndexRoute,
   AuthenticatedClientsIndexRoute: AuthenticatedClientsIndexRoute,
+  AuthenticatedExpensesIndexRoute: AuthenticatedExpensesIndexRoute,
+  AuthenticatedInvoicesIndexRoute: AuthenticatedInvoicesIndexRoute,
+  AuthenticatedJournalEntriesIndexRoute: AuthenticatedJournalEntriesIndexRoute,
   AuthenticatedProjectsIndexRoute: AuthenticatedProjectsIndexRoute,
   AuthenticatedRolesIndexRoute: AuthenticatedRolesIndexRoute,
   AuthenticatedServicesIndexRoute: AuthenticatedServicesIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
+  AuthenticatedChartOfAccountsAccountIdEditRoute:
+    AuthenticatedChartOfAccountsAccountIdEditRoute,
   AuthenticatedClientsClientIdEditRoute: AuthenticatedClientsClientIdEditRoute,
+  AuthenticatedExpensesExpenseIdEditRoute:
+    AuthenticatedExpensesExpenseIdEditRoute,
+  AuthenticatedInvoicesInvoiceIdEditRoute:
+    AuthenticatedInvoicesInvoiceIdEditRoute,
+  AuthenticatedInvoicesInvoiceIdPrintRoute:
+    AuthenticatedInvoicesInvoiceIdPrintRoute,
+  AuthenticatedInvoicesPaymentsNewRoute: AuthenticatedInvoicesPaymentsNewRoute,
   AuthenticatedProjectsProjectIdEditRoute:
     AuthenticatedProjectsProjectIdEditRoute,
   AuthenticatedRolesRoleIdEditRoute: AuthenticatedRolesRoleIdEditRoute,
   AuthenticatedServicesServiceIdEditRoute:
     AuthenticatedServicesServiceIdEditRoute,
   AuthenticatedUsersUserIdEditRoute: AuthenticatedUsersUserIdEditRoute,
+  AuthenticatedInvoicesPaymentsIndexRoute:
+    AuthenticatedInvoicesPaymentsIndexRoute,
+  AuthenticatedInvoicesPaymentsPaymentIdEditRoute:
+    AuthenticatedInvoicesPaymentsPaymentIdEditRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
@@ -346,21 +591,35 @@ export interface FileRoutesByFullPath {
   '': typeof AuthenticatedRouteWithChildren
   '/login': typeof authLoginRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/chart-of-accounts/new': typeof AuthenticatedChartOfAccountsNewRoute
   '/clients/new': typeof AuthenticatedClientsNewRoute
+  '/expenses/new': typeof AuthenticatedExpensesNewRoute
+  '/invoices/new': typeof AuthenticatedInvoicesNewRoute
   '/projects/new': typeof AuthenticatedProjectsNewRoute
   '/roles/new': typeof AuthenticatedRolesNewRoute
   '/services/new': typeof AuthenticatedServicesNewRoute
   '/users/new': typeof AuthenticatedUsersNewRoute
+  '/chart-of-accounts': typeof AuthenticatedChartOfAccountsIndexRoute
   '/clients': typeof AuthenticatedClientsIndexRoute
+  '/expenses': typeof AuthenticatedExpensesIndexRoute
+  '/invoices': typeof AuthenticatedInvoicesIndexRoute
+  '/journal-entries': typeof AuthenticatedJournalEntriesIndexRoute
   '/projects': typeof AuthenticatedProjectsIndexRoute
   '/roles': typeof AuthenticatedRolesIndexRoute
   '/services': typeof AuthenticatedServicesIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
+  '/chart-of-accounts/$accountId/edit': typeof AuthenticatedChartOfAccountsAccountIdEditRoute
   '/clients/$clientId/edit': typeof AuthenticatedClientsClientIdEditRoute
+  '/expenses/$expenseId/edit': typeof AuthenticatedExpensesExpenseIdEditRoute
+  '/invoices/$invoiceId/edit': typeof AuthenticatedInvoicesInvoiceIdEditRoute
+  '/invoices/$invoiceId/print': typeof AuthenticatedInvoicesInvoiceIdPrintRoute
+  '/invoices/payments/new': typeof AuthenticatedInvoicesPaymentsNewRoute
   '/projects/$projectId/edit': typeof AuthenticatedProjectsProjectIdEditRoute
   '/roles/$roleId/edit': typeof AuthenticatedRolesRoleIdEditRoute
   '/services/$serviceId/edit': typeof AuthenticatedServicesServiceIdEditRoute
   '/users/$userId/edit': typeof AuthenticatedUsersUserIdEditRoute
+  '/invoices/payments': typeof AuthenticatedInvoicesPaymentsIndexRoute
+  '/invoices/payments/$paymentId/edit': typeof AuthenticatedInvoicesPaymentsPaymentIdEditRoute
 }
 
 export interface FileRoutesByTo {
@@ -368,21 +627,35 @@ export interface FileRoutesByTo {
   '': typeof AuthenticatedRouteWithChildren
   '/login': typeof authLoginRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/chart-of-accounts/new': typeof AuthenticatedChartOfAccountsNewRoute
   '/clients/new': typeof AuthenticatedClientsNewRoute
+  '/expenses/new': typeof AuthenticatedExpensesNewRoute
+  '/invoices/new': typeof AuthenticatedInvoicesNewRoute
   '/projects/new': typeof AuthenticatedProjectsNewRoute
   '/roles/new': typeof AuthenticatedRolesNewRoute
   '/services/new': typeof AuthenticatedServicesNewRoute
   '/users/new': typeof AuthenticatedUsersNewRoute
+  '/chart-of-accounts': typeof AuthenticatedChartOfAccountsIndexRoute
   '/clients': typeof AuthenticatedClientsIndexRoute
+  '/expenses': typeof AuthenticatedExpensesIndexRoute
+  '/invoices': typeof AuthenticatedInvoicesIndexRoute
+  '/journal-entries': typeof AuthenticatedJournalEntriesIndexRoute
   '/projects': typeof AuthenticatedProjectsIndexRoute
   '/roles': typeof AuthenticatedRolesIndexRoute
   '/services': typeof AuthenticatedServicesIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
+  '/chart-of-accounts/$accountId/edit': typeof AuthenticatedChartOfAccountsAccountIdEditRoute
   '/clients/$clientId/edit': typeof AuthenticatedClientsClientIdEditRoute
+  '/expenses/$expenseId/edit': typeof AuthenticatedExpensesExpenseIdEditRoute
+  '/invoices/$invoiceId/edit': typeof AuthenticatedInvoicesInvoiceIdEditRoute
+  '/invoices/$invoiceId/print': typeof AuthenticatedInvoicesInvoiceIdPrintRoute
+  '/invoices/payments/new': typeof AuthenticatedInvoicesPaymentsNewRoute
   '/projects/$projectId/edit': typeof AuthenticatedProjectsProjectIdEditRoute
   '/roles/$roleId/edit': typeof AuthenticatedRolesRoleIdEditRoute
   '/services/$serviceId/edit': typeof AuthenticatedServicesServiceIdEditRoute
   '/users/$userId/edit': typeof AuthenticatedUsersUserIdEditRoute
+  '/invoices/payments': typeof AuthenticatedInvoicesPaymentsIndexRoute
+  '/invoices/payments/$paymentId/edit': typeof AuthenticatedInvoicesPaymentsPaymentIdEditRoute
 }
 
 export interface FileRoutesById {
@@ -391,21 +664,35 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/(auth)/login': typeof authLoginRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/chart-of-accounts/new': typeof AuthenticatedChartOfAccountsNewRoute
   '/_authenticated/clients/new': typeof AuthenticatedClientsNewRoute
+  '/_authenticated/expenses/new': typeof AuthenticatedExpensesNewRoute
+  '/_authenticated/invoices/new': typeof AuthenticatedInvoicesNewRoute
   '/_authenticated/projects/new': typeof AuthenticatedProjectsNewRoute
   '/_authenticated/roles/new': typeof AuthenticatedRolesNewRoute
   '/_authenticated/services/new': typeof AuthenticatedServicesNewRoute
   '/_authenticated/users/new': typeof AuthenticatedUsersNewRoute
+  '/_authenticated/chart-of-accounts/': typeof AuthenticatedChartOfAccountsIndexRoute
   '/_authenticated/clients/': typeof AuthenticatedClientsIndexRoute
+  '/_authenticated/expenses/': typeof AuthenticatedExpensesIndexRoute
+  '/_authenticated/invoices/': typeof AuthenticatedInvoicesIndexRoute
+  '/_authenticated/journal-entries/': typeof AuthenticatedJournalEntriesIndexRoute
   '/_authenticated/projects/': typeof AuthenticatedProjectsIndexRoute
   '/_authenticated/roles/': typeof AuthenticatedRolesIndexRoute
   '/_authenticated/services/': typeof AuthenticatedServicesIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
+  '/_authenticated/chart-of-accounts/$accountId/edit': typeof AuthenticatedChartOfAccountsAccountIdEditRoute
   '/_authenticated/clients/$clientId/edit': typeof AuthenticatedClientsClientIdEditRoute
+  '/_authenticated/expenses/$expenseId/edit': typeof AuthenticatedExpensesExpenseIdEditRoute
+  '/_authenticated/invoices/$invoiceId/edit': typeof AuthenticatedInvoicesInvoiceIdEditRoute
+  '/_authenticated/invoices/$invoiceId/print': typeof AuthenticatedInvoicesInvoiceIdPrintRoute
+  '/_authenticated/invoices/payments/new': typeof AuthenticatedInvoicesPaymentsNewRoute
   '/_authenticated/projects/$projectId/edit': typeof AuthenticatedProjectsProjectIdEditRoute
   '/_authenticated/roles/$roleId/edit': typeof AuthenticatedRolesRoleIdEditRoute
   '/_authenticated/services/$serviceId/edit': typeof AuthenticatedServicesServiceIdEditRoute
   '/_authenticated/users/$userId/edit': typeof AuthenticatedUsersUserIdEditRoute
+  '/_authenticated/invoices/payments/': typeof AuthenticatedInvoicesPaymentsIndexRoute
+  '/_authenticated/invoices/payments/$paymentId/edit': typeof AuthenticatedInvoicesPaymentsPaymentIdEditRoute
 }
 
 export interface FileRouteTypes {
@@ -415,63 +702,105 @@ export interface FileRouteTypes {
     | ''
     | '/login'
     | '/dashboard'
+    | '/chart-of-accounts/new'
     | '/clients/new'
+    | '/expenses/new'
+    | '/invoices/new'
     | '/projects/new'
     | '/roles/new'
     | '/services/new'
     | '/users/new'
+    | '/chart-of-accounts'
     | '/clients'
+    | '/expenses'
+    | '/invoices'
+    | '/journal-entries'
     | '/projects'
     | '/roles'
     | '/services'
     | '/users'
+    | '/chart-of-accounts/$accountId/edit'
     | '/clients/$clientId/edit'
+    | '/expenses/$expenseId/edit'
+    | '/invoices/$invoiceId/edit'
+    | '/invoices/$invoiceId/print'
+    | '/invoices/payments/new'
     | '/projects/$projectId/edit'
     | '/roles/$roleId/edit'
     | '/services/$serviceId/edit'
     | '/users/$userId/edit'
+    | '/invoices/payments'
+    | '/invoices/payments/$paymentId/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | ''
     | '/login'
     | '/dashboard'
+    | '/chart-of-accounts/new'
     | '/clients/new'
+    | '/expenses/new'
+    | '/invoices/new'
     | '/projects/new'
     | '/roles/new'
     | '/services/new'
     | '/users/new'
+    | '/chart-of-accounts'
     | '/clients'
+    | '/expenses'
+    | '/invoices'
+    | '/journal-entries'
     | '/projects'
     | '/roles'
     | '/services'
     | '/users'
+    | '/chart-of-accounts/$accountId/edit'
     | '/clients/$clientId/edit'
+    | '/expenses/$expenseId/edit'
+    | '/invoices/$invoiceId/edit'
+    | '/invoices/$invoiceId/print'
+    | '/invoices/payments/new'
     | '/projects/$projectId/edit'
     | '/roles/$roleId/edit'
     | '/services/$serviceId/edit'
     | '/users/$userId/edit'
+    | '/invoices/payments'
+    | '/invoices/payments/$paymentId/edit'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/(auth)/login'
     | '/_authenticated/dashboard'
+    | '/_authenticated/chart-of-accounts/new'
     | '/_authenticated/clients/new'
+    | '/_authenticated/expenses/new'
+    | '/_authenticated/invoices/new'
     | '/_authenticated/projects/new'
     | '/_authenticated/roles/new'
     | '/_authenticated/services/new'
     | '/_authenticated/users/new'
+    | '/_authenticated/chart-of-accounts/'
     | '/_authenticated/clients/'
+    | '/_authenticated/expenses/'
+    | '/_authenticated/invoices/'
+    | '/_authenticated/journal-entries/'
     | '/_authenticated/projects/'
     | '/_authenticated/roles/'
     | '/_authenticated/services/'
     | '/_authenticated/users/'
+    | '/_authenticated/chart-of-accounts/$accountId/edit'
     | '/_authenticated/clients/$clientId/edit'
+    | '/_authenticated/expenses/$expenseId/edit'
+    | '/_authenticated/invoices/$invoiceId/edit'
+    | '/_authenticated/invoices/$invoiceId/print'
+    | '/_authenticated/invoices/payments/new'
     | '/_authenticated/projects/$projectId/edit'
     | '/_authenticated/roles/$roleId/edit'
     | '/_authenticated/services/$serviceId/edit'
     | '/_authenticated/users/$userId/edit'
+    | '/_authenticated/invoices/payments/'
+    | '/_authenticated/invoices/payments/$paymentId/edit'
   fileRoutesById: FileRoutesById
 }
 
@@ -509,21 +838,35 @@ export const routeTree = rootRoute
       "filePath": "_authenticated.tsx",
       "children": [
         "/_authenticated/dashboard",
+        "/_authenticated/chart-of-accounts/new",
         "/_authenticated/clients/new",
+        "/_authenticated/expenses/new",
+        "/_authenticated/invoices/new",
         "/_authenticated/projects/new",
         "/_authenticated/roles/new",
         "/_authenticated/services/new",
         "/_authenticated/users/new",
+        "/_authenticated/chart-of-accounts/",
         "/_authenticated/clients/",
+        "/_authenticated/expenses/",
+        "/_authenticated/invoices/",
+        "/_authenticated/journal-entries/",
         "/_authenticated/projects/",
         "/_authenticated/roles/",
         "/_authenticated/services/",
         "/_authenticated/users/",
+        "/_authenticated/chart-of-accounts/$accountId/edit",
         "/_authenticated/clients/$clientId/edit",
+        "/_authenticated/expenses/$expenseId/edit",
+        "/_authenticated/invoices/$invoiceId/edit",
+        "/_authenticated/invoices/$invoiceId/print",
+        "/_authenticated/invoices/payments/new",
         "/_authenticated/projects/$projectId/edit",
         "/_authenticated/roles/$roleId/edit",
         "/_authenticated/services/$serviceId/edit",
-        "/_authenticated/users/$userId/edit"
+        "/_authenticated/users/$userId/edit",
+        "/_authenticated/invoices/payments/",
+        "/_authenticated/invoices/payments/$paymentId/edit"
       ]
     },
     "/(auth)/login": {
@@ -533,8 +876,20 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/dashboard.tsx",
       "parent": "/_authenticated"
     },
+    "/_authenticated/chart-of-accounts/new": {
+      "filePath": "_authenticated/chart-of-accounts/new.tsx",
+      "parent": "/_authenticated"
+    },
     "/_authenticated/clients/new": {
       "filePath": "_authenticated/clients/new.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/expenses/new": {
+      "filePath": "_authenticated/expenses/new.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/invoices/new": {
+      "filePath": "_authenticated/invoices/new.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/projects/new": {
@@ -553,8 +908,24 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/users/new.tsx",
       "parent": "/_authenticated"
     },
+    "/_authenticated/chart-of-accounts/": {
+      "filePath": "_authenticated/chart-of-accounts/index.tsx",
+      "parent": "/_authenticated"
+    },
     "/_authenticated/clients/": {
       "filePath": "_authenticated/clients/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/expenses/": {
+      "filePath": "_authenticated/expenses/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/invoices/": {
+      "filePath": "_authenticated/invoices/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/journal-entries/": {
+      "filePath": "_authenticated/journal-entries/index.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/projects/": {
@@ -573,8 +944,28 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/users/index.tsx",
       "parent": "/_authenticated"
     },
+    "/_authenticated/chart-of-accounts/$accountId/edit": {
+      "filePath": "_authenticated/chart-of-accounts/$accountId.edit.tsx",
+      "parent": "/_authenticated"
+    },
     "/_authenticated/clients/$clientId/edit": {
       "filePath": "_authenticated/clients/$clientId.edit.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/expenses/$expenseId/edit": {
+      "filePath": "_authenticated/expenses/$expenseId.edit.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/invoices/$invoiceId/edit": {
+      "filePath": "_authenticated/invoices/$invoiceId.edit.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/invoices/$invoiceId/print": {
+      "filePath": "_authenticated/invoices/$invoiceId.print.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/invoices/payments/new": {
+      "filePath": "_authenticated/invoices/payments/new.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/projects/$projectId/edit": {
@@ -591,6 +982,14 @@ export const routeTree = rootRoute
     },
     "/_authenticated/users/$userId/edit": {
       "filePath": "_authenticated/users/$userId.edit.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/invoices/payments/": {
+      "filePath": "_authenticated/invoices/payments/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/invoices/payments/$paymentId/edit": {
+      "filePath": "_authenticated/invoices/payments/$paymentId.edit.tsx",
       "parent": "/_authenticated"
     }
   }
