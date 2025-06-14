@@ -68,3 +68,8 @@ export function transformOptions(
     label: item[labelField].toString().toUpperCase(),
   }))
 }
+
+export function reportCaseFormatter(value: string) {
+  const result = value.replace(/([A-Z])/g, ' $1')
+  return result.charAt(0).toUpperCase() + result.slice(1)
+}
