@@ -55,7 +55,7 @@ function InvoiceStatusRouteComponent() {
       {isLoading && <ReportLoader />}
 
       {!isLoading && data?.data && (
-        <InvoicesByStatusDatatable invoices={data.data} />
+        <InvoicesByStatusDatatable invoices={data.data} totals={data.totals} />
       )}
     </div>
   )
