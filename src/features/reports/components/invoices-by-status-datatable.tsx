@@ -3,13 +3,20 @@ import type { InvoiceStatus } from '@/features/reports/utils/report.types'
 import { CustomStatusBadge } from '@/components/custom/status-badges'
 import { dateFormat } from '@/lib/formatters'
 import { ReportDataTable } from '@/components/custom/report-datatable'
+import { TableCell } from '@/components/ui/table'
 
 interface InvoicesByStatusDatatableProps {
   invoices: Array<InvoiceStatus>
+  totals: {
+    totalAmount: string
+    totalPaid: string
+    totalBalance: string
+  }
 }
 
 function InvoicesByStatusDatatable({
   invoices,
+  totals,
 }: InvoicesByStatusDatatableProps) {
   const columns: Array<ColumnDef<InvoiceStatus>> = [
     {
@@ -127,33 +134,23 @@ function InvoicesByStatusDatatable({
             Balance: balance,
           }),
         )}
+        customFooter={
+          <>
+            <TableCell className="font=semibold text-lg" colSpan={5}>
+              Total:
+            </TableCell>
+            <TableCell className="font=semibold text-right">
+              {totals.totalAmount}
+            </TableCell>
+            <TableCell className="font=semibold text-right">
+              {totals.totalPaid}
+            </TableCell>
+            <TableCell className="font=semibold text-right">
+              {totals.totalBalance}
+            </TableCell>
+          </>
+        }
       />
-      {/* <ReportHeader
-        reportTitle="Invoice Status Report"
-        reportDescription="This report shows the status of invoices based on their payment status."
-        data={invoices.map(
-          ({
-            balance,
-            clientName,
-            dueDate,
-            invoiceDate,
-            invoiceNo,
-            status,
-            totalAmount,
-            totalPaid,
-          }) => ({
-            'Invoice No': invoiceNo,
-            'Client Name': clientName.toUpperCase(),
-            'Invoice Date': dateFormat(invoiceDate, 'reporting'),
-            'Due Date': dateFormat(dueDate, 'reporting'),
-            Status: status.charAt(0).toUpperCase() + status.slice(1),
-            'Invoice Amount': totalAmount,
-            'Amount Paid': totalPaid,
-            Balance: balance,
-          }),
-        )}
-      />
-      <DataTable data={invoices} columns={columns} /> */}
     </div>
   )
 }
