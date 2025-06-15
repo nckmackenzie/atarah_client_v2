@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { download, generateCsv, mkConfig } from 'export-to-csv'
 
 export function useExportExcel(fileName?: string) {
