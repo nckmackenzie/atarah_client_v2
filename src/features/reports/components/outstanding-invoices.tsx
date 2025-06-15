@@ -89,8 +89,8 @@ function OutstandingInvoicesDatatable({
       <ReportDataTable
         columns={columns}
         data={invoices}
-        reportTitle="Invoice Status Report"
-        reportDescription="This report shows the status of invoices based on their payment status."
+        reportTitle="Outstanding Invoices Report"
+        reportDescription="This report shows the outstanding invoices."
         orientation="landscape"
         excelData={invoices.map(
           ({
