@@ -41,18 +41,19 @@ export const reportDateRangeSchema = z.object({
   to: z.string().date().optional(),
 })
 
-export const reportDateRangeSchemaWithRequired = reportDateRangeSchema
-  .required({
-    from: true,
-    to: true,
+export const reportDateRangeSchemaWithRequired = z
+  .object({
+    from: z.string().date('Start date must be a valid date'),
+    to: z.string().date('End date must be a valid date'),
   })
-  .refine((data) => data.from, {
-    message: 'Start date is required',
-    path: ['from'],
-  })
-  .refine((data) => data.to, {
-    message: 'End date is required',
-    path: ['to'],
+  .superRefine((data, ctx) => {
+    if (data.from && data.to && new Date(data.from) > new Date(data.to)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Start date cannot be after end date',
+        path: ['from'],
+      })
+    }
   })
 
 export const reportWithClientAndDateRangeSchema = z.object({
