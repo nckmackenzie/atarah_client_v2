@@ -23,6 +23,7 @@ interface ReportParamsWithClientAndDateRangeProps {
   from?: string
   to?: string
   navigate: UseNavigateResult<'/reports/invoice-status'>
+  withAllClients?: boolean
 }
 
 export function ReportParamsWithClientAndDateRange({
@@ -31,12 +32,13 @@ export function ReportParamsWithClientAndDateRange({
   to,
   clients,
   navigate,
+  withAllClients = true,
 }: ReportParamsWithClientAndDateRangeProps) {
   const form = useForm<
     z.infer<typeof reportWithClientAndDateRangeSchemaWithRequired>
   >({
     defaultValues: {
-      clientId: clientId || 'all',
+      clientId: clientId || withAllClients ? 'all' : '',
       from,
       to,
     },
@@ -95,7 +97,11 @@ export function ReportParamsWithClientAndDateRange({
                 <FormControl>
                   <CustomSelect
                     defaultValue={field.value}
-                    options={[{ value: 'all', label: 'All' }, ...clients]}
+                    options={
+                      withAllClients
+                        ? [{ label: 'All Clients', value: 'all' }, ...clients]
+                        : clients
+                    }
                     onChange={field.onChange}
                     value={field.value}
                   />
