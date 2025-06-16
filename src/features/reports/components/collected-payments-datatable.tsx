@@ -46,7 +46,7 @@ function CollectedPaymentsDatatable({
     },
     {
       accessorKey: 'amount',
-      header: () => <div>Due Date</div>,
+      header: () => <div>Amount</div>,
       cell: ({
         row: {
           original: { amount },
