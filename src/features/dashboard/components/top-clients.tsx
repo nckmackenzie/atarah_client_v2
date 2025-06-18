@@ -20,6 +20,15 @@ import {
 
 import { DataTable } from '@/components/custom/datatable'
 import { Skeleton } from '@/components/ui/skeleton'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import { Badge } from '@/components/ui/badge'
 
 export function TopClients() {
   const {
@@ -40,7 +49,11 @@ export function TopClients() {
     {
       accessorKey: 'revenue',
       header: 'Total Revenue',
-      cell: ({ row }) => numberFormat(row.original.revenue),
+      cell: ({ row }) => (
+        <Badge variant="success">
+          Ksh {numberFormat(row.original.revenue)}
+        </Badge>
+      ),
     },
   ]
 
@@ -139,6 +152,47 @@ export function RevenueVsExpensesSkeleton() {
         <div className="w-full h-60">
           <Skeleton className="w-full h-full" />
         </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+export function TopClientsFallback() {
+  return (
+    <Card className="shadow-none col-span-3">
+      <CardHeader>
+        <CardTitle>
+          <Skeleton className="h-6 w-40" />
+        </CardTitle>
+        <CardDescription>
+          <Skeleton className="h-4 w-60" />
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Client Name</TableHead>
+              <TableHead>Invoices</TableHead>
+              <TableHead>Total Revenue</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {[...Array(5)].map((_, index) => (
+              <TableRow key={index}>
+                <TableCell>
+                  <Skeleton className="h-4 w-64" />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className="h-4 w-8" />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className="h-4 w-20" />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </CardContent>
     </Card>
   )
