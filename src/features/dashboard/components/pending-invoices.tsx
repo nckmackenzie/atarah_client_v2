@@ -47,7 +47,7 @@ export function PendingInvoices() {
     },
   ]
   return (
-    <Card className="shadow-none col-span-2">
+    <Card className="shadow-none md:col-span-6">
       <CardHeader>
         <CardTitle>Pending Invoices</CardTitle>
         <CardDescription>
@@ -63,7 +63,7 @@ export function PendingInvoices() {
 
 export function PendingInvoicesFallback() {
   return (
-    <Card className="shadow-none animate-pulse md:col-span-2">
+    <Card className="shadow-none md:col-span-6">
       <CardHeader>
         <CardTitle>
           <Skeleton className="h-6 w-40" />
@@ -83,7 +83,7 @@ export function PendingInvoicesFallback() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {[...Array(4)].map((_, index) => (
+            {[...Array(5)].map((_, index) => (
               <TableRow key={index}>
                 <TableCell>
                   <Skeleton className="h-4 w-24" />
