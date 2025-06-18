@@ -99,10 +99,11 @@ export function AppSidebar({ ...props }: AppSidebarProps) {
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56 [&>*]:cursor-pointer">
-            {/* TODO: CHANGE PASSWORD FUNCTIONALITY */}
-            <DropdownMenuItem>
-              <Lock className="icon" />
-              <span>Change Passsword</span>
+            <DropdownMenuItem asChild>
+              <Link to="/profile/password">
+                <Lock className="icon" />
+                <span>Change Password</span>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => logout()}>
