@@ -24,6 +24,7 @@ import {
   RevenueExpenseChart,
   RevenueVsExpensesSkeleton,
   TopClients,
+  TopClientsFallback,
 } from '@/features/dashboard/components/top-clients'
 
 export const Route = createFileRoute('/_authenticated/dashboard')({
@@ -38,8 +39,8 @@ export const Route = createFileRoute('/_authenticated/dashboard')({
         ))}
       </div>
       <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-7">
-        <PendingInvoicesFallback />
         <RevenueVsExpensesSkeleton />
+        <TopClientsFallback />
       </div>
       <PendingInvoicesFallback />
     </div>
@@ -87,9 +88,8 @@ function RouteComponent() {
         />
       </div>
       <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-7">
-        {/* Revenue Trend Chart */}
         <RevenueExpenseChart />
-        <Suspense fallback={<PendingInvoicesFallback />}>
+        <Suspense fallback={<TopClientsFallback />}>
           <TopClients />
         </Suspense>
       </div>
@@ -97,9 +97,6 @@ function RouteComponent() {
         <Suspense fallback={<PendingInvoicesFallback />}>
           <PendingInvoices />
         </Suspense>
-        {/* <Suspense fallback={<PendingInvoicesFallback />}>
-          <TopClients />
-        </Suspense> */}
       </div>
     </div>
   )
