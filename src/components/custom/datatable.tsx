@@ -41,11 +41,13 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: Array<ColumnDef<TData, TValue>>
   data: Array<TData>
+  withPaginationButtons?: boolean
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  withPaginationButtons = true,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
 
@@ -113,7 +115,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      {withPaginationButtons && <DataTablePagination table={table} />}
     </>
   )
 }
