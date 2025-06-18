@@ -148,3 +148,23 @@ export function ErrorNotification({
     </div>
   )
 }
+
+interface ErrorFallbackProps {
+  error: Error
+  resetErrorBoundary: (...args: Array<unknown>) => void
+}
+
+export const ErrorFallback = ({
+  error,
+  resetErrorBoundary,
+}: ErrorFallbackProps) => {
+  return (
+    <div role="alert" className="error-fallback">
+      <p>Something went wrong:</p>
+      <pre>{error.message}</pre>
+      <Button size="sm" onClick={resetErrorBoundary}>
+        Try again
+      </Button>
+    </div>
+  )
+}
