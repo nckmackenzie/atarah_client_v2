@@ -38,7 +38,7 @@ export function ErrorComponent({
       <p className="text-muted-foreground mb-6">
         Error: {message || 'Unknown error'}
       </p>
-      <div className="flex gap-4">
+      <div className="flex items-center gap-4">
         <Button asChild variant="default">
           <Link to="..">Go Back</Link>
         </Button>
