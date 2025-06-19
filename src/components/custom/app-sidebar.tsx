@@ -146,7 +146,7 @@ function UserAvatar() {
   const svg = avatar.toDataUri()
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center overflow-hidden">
       <Avatar className={cn({ 'size-10': open, 'size-8': !open })}>
         <AvatarImage src={svg} alt={user.name} />
         <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
@@ -156,7 +156,9 @@ function UserAvatar() {
           <p className="text-sm font-medium text-accent-foreground w-max">
             {user.name || 'User'}
           </p>
-          <p className="text-xs text-secondary-foreground">{user.email}</p>
+          <p className="text-xs text-secondary-foreground truncate">
+            {user.email}
+          </p>
         </div>
       )}
     </div>
