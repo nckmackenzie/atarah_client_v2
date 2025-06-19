@@ -15,7 +15,7 @@ function RouteComponent() {
           className="mx-auto h-16 w-auto"
         />
       </div>
-      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md">
         <Outlet />
       </div>
     </div>
