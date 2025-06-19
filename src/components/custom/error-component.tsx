@@ -43,11 +43,7 @@ export function ErrorComponent({
           <Link to="..">Go Back</Link>
         </Button>
         {action && (
-          <Button
-            onClick={action.onClick}
-            variant="destructive"
-            className={cn('mt-6')}
-          >
+          <Button onClick={action.onClick} variant="destructive">
             {action.label || 'Retry'}
           </Button>
         )}
