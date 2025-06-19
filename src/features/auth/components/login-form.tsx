@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { isAxiosError } from 'axios'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -88,7 +89,15 @@ export function LoginForm() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <div className="flex items-center justify-between">
+                  <FormLabel>Password</FormLabel>
+                  <Link
+                    to="/forgot-password"
+                    className="text-link text-sm transition-all hover:underline"
+                  >
+                    Forgot Password?
+                  </Link>
+                </div>
                 <FormControl>
                   <PasswordInput
                     {...field}
