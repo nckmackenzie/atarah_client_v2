@@ -11,9 +11,12 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as ChangePasswordImport } from './routes/change-password'
 import { Route as AuthenticatedImport } from './routes/_authenticated'
+import { Route as authRouteImport } from './routes/(auth)/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as AuthenticatedDashboardImport } from './routes/_authenticated/dashboard'
+import { Route as authResetPasswordImport } from './routes/(auth)/reset-password'
 import { Route as authLoginImport } from './routes/(auth)/login'
 import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
 import { Route as AuthenticatedServicesIndexImport } from './routes/_authenticated/services/index'
@@ -24,6 +27,7 @@ import { Route as AuthenticatedInvoicesIndexImport } from './routes/_authenticat
 import { Route as AuthenticatedExpensesIndexImport } from './routes/_authenticated/expenses/index'
 import { Route as AuthenticatedClientsIndexImport } from './routes/_authenticated/clients/index'
 import { Route as AuthenticatedChartOfAccountsIndexImport } from './routes/_authenticated/chart-of-accounts/index'
+import { Route as authForgotPasswordIndexImport } from './routes/(auth)/forgot-password/index'
 import { Route as AuthenticatedUsersNewImport } from './routes/_authenticated/users/new'
 import { Route as AuthenticatedServicesNewImport } from './routes/_authenticated/services/new'
 import { Route as AuthenticatedRolesNewImport } from './routes/_authenticated/roles/new'
@@ -33,10 +37,12 @@ import { Route as AuthenticatedReportsExpensesReportImport } from './routes/_aut
 import { Route as AuthenticatedReportsCollectedPaymentsImport } from './routes/_authenticated/reports/collected-payments'
 import { Route as AuthenticatedReportsClientStatementImport } from './routes/_authenticated/reports/client-statement'
 import { Route as AuthenticatedProjectsNewImport } from './routes/_authenticated/projects/new'
+import { Route as AuthenticatedProfilePasswordImport } from './routes/_authenticated/profile/password'
 import { Route as AuthenticatedInvoicesNewImport } from './routes/_authenticated/invoices/new'
 import { Route as AuthenticatedExpensesNewImport } from './routes/_authenticated/expenses/new'
 import { Route as AuthenticatedClientsNewImport } from './routes/_authenticated/clients/new'
 import { Route as AuthenticatedChartOfAccountsNewImport } from './routes/_authenticated/chart-of-accounts/new'
+import { Route as authForgotPasswordResetCodeImport } from './routes/(auth)/forgot-password/reset-code'
 import { Route as AuthenticatedReportsIncomeStatementIndexImport } from './routes/_authenticated/reports/income-statement/index'
 import { Route as AuthenticatedInvoicesPaymentsIndexImport } from './routes/_authenticated/invoices/payments/index'
 import { Route as AuthenticatedUsersUserIdEditImport } from './routes/_authenticated/users/$userId.edit'
@@ -55,8 +61,19 @@ import { Route as AuthenticatedInvoicesPaymentsPaymentIdEditImport } from './rou
 
 // Create/Update Routes
 
+const ChangePasswordRoute = ChangePasswordImport.update({
+  id: '/change-password',
+  path: '/change-password',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const AuthenticatedRoute = AuthenticatedImport.update({
   id: '/_authenticated',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const authRouteRoute = authRouteImport.update({
+  id: '/(auth)',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -72,10 +89,16 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardImport.update({
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
+const authResetPasswordRoute = authResetPasswordImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => authRouteRoute,
+} as any)
+
 const authLoginRoute = authLoginImport.update({
-  id: '/(auth)/login',
+  id: '/login',
   path: '/login',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => authRouteRoute,
 } as any)
 
 const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
@@ -142,6 +165,12 @@ const AuthenticatedChartOfAccountsIndexRoute =
     getParentRoute: () => AuthenticatedRoute,
   } as any)
 
+const authForgotPasswordIndexRoute = authForgotPasswordIndexImport.update({
+  id: '/forgot-password/',
+  path: '/forgot-password/',
+  getParentRoute: () => authRouteRoute,
+} as any)
+
 const AuthenticatedUsersNewRoute = AuthenticatedUsersNewImport.update({
   id: '/users/new',
   path: '/users/new',
@@ -201,6 +230,13 @@ const AuthenticatedProjectsNewRoute = AuthenticatedProjectsNewImport.update({
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
+const AuthenticatedProfilePasswordRoute =
+  AuthenticatedProfilePasswordImport.update({
+    id: '/profile/password',
+    path: '/profile/password',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
 const AuthenticatedInvoicesNewRoute = AuthenticatedInvoicesNewImport.update({
   id: '/invoices/new',
   path: '/invoices/new',
@@ -224,6 +260,13 @@ const AuthenticatedChartOfAccountsNewRoute =
     id: '/chart-of-accounts/new',
     path: '/chart-of-accounts/new',
     getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const authForgotPasswordResetCodeRoute =
+  authForgotPasswordResetCodeImport.update({
+    id: '/forgot-password/reset-code',
+    path: '/forgot-password/reset-code',
+    getParentRoute: () => authRouteRoute,
   } as any)
 
 const AuthenticatedReportsIncomeStatementIndexRoute =
@@ -342,6 +385,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/(auth)': {
+      id: '/(auth)'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof authRouteImport
+      parentRoute: typeof rootRoute
+    }
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
@@ -349,12 +399,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedImport
       parentRoute: typeof rootRoute
     }
+    '/change-password': {
+      id: '/change-password'
+      path: '/change-password'
+      fullPath: '/change-password'
+      preLoaderRoute: typeof ChangePasswordImport
+      parentRoute: typeof rootRoute
+    }
     '/(auth)/login': {
       id: '/(auth)/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof authLoginImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof authRouteImport
+    }
+    '/(auth)/reset-password': {
+      id: '/(auth)/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof authResetPasswordImport
+      parentRoute: typeof authRouteImport
     }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
@@ -362,6 +426,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardImport
       parentRoute: typeof AuthenticatedImport
+    }
+    '/(auth)/forgot-password/reset-code': {
+      id: '/(auth)/forgot-password/reset-code'
+      path: '/forgot-password/reset-code'
+      fullPath: '/forgot-password/reset-code'
+      preLoaderRoute: typeof authForgotPasswordResetCodeImport
+      parentRoute: typeof authRouteImport
     }
     '/_authenticated/chart-of-accounts/new': {
       id: '/_authenticated/chart-of-accounts/new'
@@ -389,6 +460,13 @@ declare module '@tanstack/react-router' {
       path: '/invoices/new'
       fullPath: '/invoices/new'
       preLoaderRoute: typeof AuthenticatedInvoicesNewImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/profile/password': {
+      id: '/_authenticated/profile/password'
+      path: '/profile/password'
+      fullPath: '/profile/password'
+      preLoaderRoute: typeof AuthenticatedProfilePasswordImport
       parentRoute: typeof AuthenticatedImport
     }
     '/_authenticated/projects/new': {
@@ -453,6 +531,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/users/new'
       preLoaderRoute: typeof AuthenticatedUsersNewImport
       parentRoute: typeof AuthenticatedImport
+    }
+    '/(auth)/forgot-password/': {
+      id: '/(auth)/forgot-password/'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof authForgotPasswordIndexImport
+      parentRoute: typeof authRouteImport
     }
     '/_authenticated/chart-of-accounts/': {
       id: '/_authenticated/chart-of-accounts/'
@@ -627,12 +712,31 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
+interface authRouteRouteChildren {
+  authLoginRoute: typeof authLoginRoute
+  authResetPasswordRoute: typeof authResetPasswordRoute
+  authForgotPasswordResetCodeRoute: typeof authForgotPasswordResetCodeRoute
+  authForgotPasswordIndexRoute: typeof authForgotPasswordIndexRoute
+}
+
+const authRouteRouteChildren: authRouteRouteChildren = {
+  authLoginRoute: authLoginRoute,
+  authResetPasswordRoute: authResetPasswordRoute,
+  authForgotPasswordResetCodeRoute: authForgotPasswordResetCodeRoute,
+  authForgotPasswordIndexRoute: authForgotPasswordIndexRoute,
+}
+
+const authRouteRouteWithChildren = authRouteRoute._addFileChildren(
+  authRouteRouteChildren,
+)
+
 interface AuthenticatedRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedChartOfAccountsNewRoute: typeof AuthenticatedChartOfAccountsNewRoute
   AuthenticatedClientsNewRoute: typeof AuthenticatedClientsNewRoute
   AuthenticatedExpensesNewRoute: typeof AuthenticatedExpensesNewRoute
   AuthenticatedInvoicesNewRoute: typeof AuthenticatedInvoicesNewRoute
+  AuthenticatedProfilePasswordRoute: typeof AuthenticatedProfilePasswordRoute
   AuthenticatedProjectsNewRoute: typeof AuthenticatedProjectsNewRoute
   AuthenticatedReportsClientStatementRoute: typeof AuthenticatedReportsClientStatementRoute
   AuthenticatedReportsCollectedPaymentsRoute: typeof AuthenticatedReportsCollectedPaymentsRoute
@@ -674,6 +778,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedClientsNewRoute: AuthenticatedClientsNewRoute,
   AuthenticatedExpensesNewRoute: AuthenticatedExpensesNewRoute,
   AuthenticatedInvoicesNewRoute: AuthenticatedInvoicesNewRoute,
+  AuthenticatedProfilePasswordRoute: AuthenticatedProfilePasswordRoute,
   AuthenticatedProjectsNewRoute: AuthenticatedProjectsNewRoute,
   AuthenticatedReportsClientStatementRoute:
     AuthenticatedReportsClientStatementRoute,
@@ -731,14 +836,18 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
 )
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof authRouteRouteWithChildren
   '': typeof AuthenticatedRouteWithChildren
+  '/change-password': typeof ChangePasswordRoute
   '/login': typeof authLoginRoute
+  '/reset-password': typeof authResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/forgot-password/reset-code': typeof authForgotPasswordResetCodeRoute
   '/chart-of-accounts/new': typeof AuthenticatedChartOfAccountsNewRoute
   '/clients/new': typeof AuthenticatedClientsNewRoute
   '/expenses/new': typeof AuthenticatedExpensesNewRoute
   '/invoices/new': typeof AuthenticatedInvoicesNewRoute
+  '/profile/password': typeof AuthenticatedProfilePasswordRoute
   '/projects/new': typeof AuthenticatedProjectsNewRoute
   '/reports/client-statement': typeof AuthenticatedReportsClientStatementRoute
   '/reports/collected-payments': typeof AuthenticatedReportsCollectedPaymentsRoute
@@ -748,6 +857,7 @@ export interface FileRoutesByFullPath {
   '/roles/new': typeof AuthenticatedRolesNewRoute
   '/services/new': typeof AuthenticatedServicesNewRoute
   '/users/new': typeof AuthenticatedUsersNewRoute
+  '/forgot-password': typeof authForgotPasswordIndexRoute
   '/chart-of-accounts': typeof AuthenticatedChartOfAccountsIndexRoute
   '/clients': typeof AuthenticatedClientsIndexRoute
   '/expenses': typeof AuthenticatedExpensesIndexRoute
@@ -775,14 +885,18 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof authRouteRouteWithChildren
   '': typeof AuthenticatedRouteWithChildren
+  '/change-password': typeof ChangePasswordRoute
   '/login': typeof authLoginRoute
+  '/reset-password': typeof authResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/forgot-password/reset-code': typeof authForgotPasswordResetCodeRoute
   '/chart-of-accounts/new': typeof AuthenticatedChartOfAccountsNewRoute
   '/clients/new': typeof AuthenticatedClientsNewRoute
   '/expenses/new': typeof AuthenticatedExpensesNewRoute
   '/invoices/new': typeof AuthenticatedInvoicesNewRoute
+  '/profile/password': typeof AuthenticatedProfilePasswordRoute
   '/projects/new': typeof AuthenticatedProjectsNewRoute
   '/reports/client-statement': typeof AuthenticatedReportsClientStatementRoute
   '/reports/collected-payments': typeof AuthenticatedReportsCollectedPaymentsRoute
@@ -792,6 +906,7 @@ export interface FileRoutesByTo {
   '/roles/new': typeof AuthenticatedRolesNewRoute
   '/services/new': typeof AuthenticatedServicesNewRoute
   '/users/new': typeof AuthenticatedUsersNewRoute
+  '/forgot-password': typeof authForgotPasswordIndexRoute
   '/chart-of-accounts': typeof AuthenticatedChartOfAccountsIndexRoute
   '/clients': typeof AuthenticatedClientsIndexRoute
   '/expenses': typeof AuthenticatedExpensesIndexRoute
@@ -821,13 +936,18 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/(auth)': typeof authRouteRouteWithChildren
   '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/change-password': typeof ChangePasswordRoute
   '/(auth)/login': typeof authLoginRoute
+  '/(auth)/reset-password': typeof authResetPasswordRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/(auth)/forgot-password/reset-code': typeof authForgotPasswordResetCodeRoute
   '/_authenticated/chart-of-accounts/new': typeof AuthenticatedChartOfAccountsNewRoute
   '/_authenticated/clients/new': typeof AuthenticatedClientsNewRoute
   '/_authenticated/expenses/new': typeof AuthenticatedExpensesNewRoute
   '/_authenticated/invoices/new': typeof AuthenticatedInvoicesNewRoute
+  '/_authenticated/profile/password': typeof AuthenticatedProfilePasswordRoute
   '/_authenticated/projects/new': typeof AuthenticatedProjectsNewRoute
   '/_authenticated/reports/client-statement': typeof AuthenticatedReportsClientStatementRoute
   '/_authenticated/reports/collected-payments': typeof AuthenticatedReportsCollectedPaymentsRoute
@@ -837,6 +957,7 @@ export interface FileRoutesById {
   '/_authenticated/roles/new': typeof AuthenticatedRolesNewRoute
   '/_authenticated/services/new': typeof AuthenticatedServicesNewRoute
   '/_authenticated/users/new': typeof AuthenticatedUsersNewRoute
+  '/(auth)/forgot-password/': typeof authForgotPasswordIndexRoute
   '/_authenticated/chart-of-accounts/': typeof AuthenticatedChartOfAccountsIndexRoute
   '/_authenticated/clients/': typeof AuthenticatedClientsIndexRoute
   '/_authenticated/expenses/': typeof AuthenticatedExpensesIndexRoute
@@ -868,12 +989,16 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | ''
+    | '/change-password'
     | '/login'
+    | '/reset-password'
     | '/dashboard'
+    | '/forgot-password/reset-code'
     | '/chart-of-accounts/new'
     | '/clients/new'
     | '/expenses/new'
     | '/invoices/new'
+    | '/profile/password'
     | '/projects/new'
     | '/reports/client-statement'
     | '/reports/collected-payments'
@@ -883,6 +1008,7 @@ export interface FileRouteTypes {
     | '/roles/new'
     | '/services/new'
     | '/users/new'
+    | '/forgot-password'
     | '/chart-of-accounts'
     | '/clients'
     | '/expenses'
@@ -911,12 +1037,16 @@ export interface FileRouteTypes {
   to:
     | '/'
     | ''
+    | '/change-password'
     | '/login'
+    | '/reset-password'
     | '/dashboard'
+    | '/forgot-password/reset-code'
     | '/chart-of-accounts/new'
     | '/clients/new'
     | '/expenses/new'
     | '/invoices/new'
+    | '/profile/password'
     | '/projects/new'
     | '/reports/client-statement'
     | '/reports/collected-payments'
@@ -926,6 +1056,7 @@ export interface FileRouteTypes {
     | '/roles/new'
     | '/services/new'
     | '/users/new'
+    | '/forgot-password'
     | '/chart-of-accounts'
     | '/clients'
     | '/expenses'
@@ -953,13 +1084,18 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/(auth)'
     | '/_authenticated'
+    | '/change-password'
     | '/(auth)/login'
+    | '/(auth)/reset-password'
     | '/_authenticated/dashboard'
+    | '/(auth)/forgot-password/reset-code'
     | '/_authenticated/chart-of-accounts/new'
     | '/_authenticated/clients/new'
     | '/_authenticated/expenses/new'
     | '/_authenticated/invoices/new'
+    | '/_authenticated/profile/password'
     | '/_authenticated/projects/new'
     | '/_authenticated/reports/client-statement'
     | '/_authenticated/reports/collected-payments'
@@ -969,6 +1105,7 @@ export interface FileRouteTypes {
     | '/_authenticated/roles/new'
     | '/_authenticated/services/new'
     | '/_authenticated/users/new'
+    | '/(auth)/forgot-password/'
     | '/_authenticated/chart-of-accounts/'
     | '/_authenticated/clients/'
     | '/_authenticated/expenses/'
@@ -998,14 +1135,16 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  authRouteRoute: typeof authRouteRouteWithChildren
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
-  authLoginRoute: typeof authLoginRoute
+  ChangePasswordRoute: typeof ChangePasswordRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  authRouteRoute: authRouteRouteWithChildren,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
-  authLoginRoute: authLoginRoute,
+  ChangePasswordRoute: ChangePasswordRoute,
 }
 
 export const routeTree = rootRoute
@@ -1019,12 +1158,22 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/(auth)",
         "/_authenticated",
-        "/(auth)/login"
+        "/change-password"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/(auth)": {
+      "filePath": "(auth)/route.tsx",
+      "children": [
+        "/(auth)/login",
+        "/(auth)/reset-password",
+        "/(auth)/forgot-password/reset-code",
+        "/(auth)/forgot-password/"
+      ]
     },
     "/_authenticated": {
       "filePath": "_authenticated.tsx",
@@ -1034,6 +1183,7 @@ export const routeTree = rootRoute
         "/_authenticated/clients/new",
         "/_authenticated/expenses/new",
         "/_authenticated/invoices/new",
+        "/_authenticated/profile/password",
         "/_authenticated/projects/new",
         "/_authenticated/reports/client-statement",
         "/_authenticated/reports/collected-payments",
@@ -1069,12 +1219,24 @@ export const routeTree = rootRoute
         "/_authenticated/invoices/payments/$paymentId/edit"
       ]
     },
+    "/change-password": {
+      "filePath": "change-password.tsx"
+    },
     "/(auth)/login": {
-      "filePath": "(auth)/login.tsx"
+      "filePath": "(auth)/login.tsx",
+      "parent": "/(auth)"
+    },
+    "/(auth)/reset-password": {
+      "filePath": "(auth)/reset-password.tsx",
+      "parent": "/(auth)"
     },
     "/_authenticated/dashboard": {
       "filePath": "_authenticated/dashboard.tsx",
       "parent": "/_authenticated"
+    },
+    "/(auth)/forgot-password/reset-code": {
+      "filePath": "(auth)/forgot-password/reset-code.tsx",
+      "parent": "/(auth)"
     },
     "/_authenticated/chart-of-accounts/new": {
       "filePath": "_authenticated/chart-of-accounts/new.tsx",
@@ -1090,6 +1252,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/invoices/new": {
       "filePath": "_authenticated/invoices/new.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/profile/password": {
+      "filePath": "_authenticated/profile/password.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/projects/new": {
@@ -1127,6 +1293,10 @@ export const routeTree = rootRoute
     "/_authenticated/users/new": {
       "filePath": "_authenticated/users/new.tsx",
       "parent": "/_authenticated"
+    },
+    "/(auth)/forgot-password/": {
+      "filePath": "(auth)/forgot-password/index.tsx",
+      "parent": "/(auth)"
     },
     "/_authenticated/chart-of-accounts/": {
       "filePath": "_authenticated/chart-of-accounts/index.tsx",
