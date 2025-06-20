@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { toast } from 'sonner'
-import { DownloadCloudIcon, MailIcon } from 'lucide-react'
+import { DownloadCloudIcon } from 'lucide-react'
 import type { InvoiceWithDetails } from '@/features/transactions/utils/transactions.types'
 import { invoiceQueryOptions } from '@/features/transactions/services/query-options'
 import { ErrorNotification } from '@/components/custom/error-component'
