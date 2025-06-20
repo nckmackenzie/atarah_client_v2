@@ -156,8 +156,8 @@ export const ErrorFallback = ({
 }: ErrorFallbackProps) => {
   return (
     <div role="alert" className="error-fallback">
-      <p>Something went wrong:</p>
-      <pre>{error.message}</pre>
+      <p className="text-bold">Something went wrong:</p>
+      <pre className="text-destructive">{error.message}</pre>
       <Button size="sm" onClick={resetErrorBoundary}>
         Try again
       </Button>
