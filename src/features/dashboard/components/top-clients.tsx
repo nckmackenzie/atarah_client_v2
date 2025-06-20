@@ -58,7 +58,7 @@ export function TopClients() {
   ]
 
   return (
-    <Card className="shadow-none col-span-3">
+    <Card className="shadow-none">
       <CardHeader>
         <CardTitle>Top Clients</CardTitle>
         <CardDescription>
@@ -92,7 +92,7 @@ export function RevenueExpenseChart() {
     data: { data },
   } = useSuspenseQuery(dashboardQueryOptions.revenueVsExpenses())
   return (
-    <Card className="col-span-4">
+    <Card>
       <CardHeader>
         <CardTitle>Revenue vs Expenses</CardTitle>
         <CardDescription>
@@ -139,7 +139,7 @@ export function RevenueExpenseChart() {
 
 export function RevenueVsExpensesSkeleton() {
   return (
-    <Card className="col-span-4">
+    <Card>
       <CardHeader>
         <CardTitle>
           <Skeleton className="h-6 w-40" />
@@ -159,7 +159,7 @@ export function RevenueVsExpensesSkeleton() {
 
 export function TopClientsFallback() {
   return (
-    <Card className="shadow-none col-span-3">
+    <Card className="shadow-none ">
       <CardHeader>
         <CardTitle>
           <Skeleton className="h-6 w-40" />
