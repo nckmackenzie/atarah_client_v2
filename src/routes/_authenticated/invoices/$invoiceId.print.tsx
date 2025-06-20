@@ -62,10 +62,10 @@ function InvoicePrintRouteComponent() {
           <DownloadCloudIcon />
           <span>Download PDF</span>
         </Button>
-        <Button variant="secondary" disabled={isDownloading}>
+        {/* <Button variant="secondary" disabled={isDownloading}>
           <MailIcon />
           <span>Email Invoice</span>
-        </Button>
+        </Button> */}
       </div>
       <InvoicePrint invoice={data} />
     </div>
