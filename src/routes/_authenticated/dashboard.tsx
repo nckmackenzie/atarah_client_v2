@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
+import { ErrorBoundary } from 'react-error-boundary'
 import {
   DollarSignIcon,
   HourglassIcon,
@@ -19,7 +20,10 @@ import {
   PendingInvoices,
   PendingInvoicesFallback,
 } from '@/features/dashboard/components/pending-invoices'
-import { ErrorNotification } from '@/components/custom/error-component'
+import {
+  ErrorFallback,
+  ErrorNotification,
+} from '@/components/custom/error-component'
 import {
   RevenueExpenseChart,
   RevenueVsExpensesSkeleton,
@@ -39,8 +43,12 @@ export const Route = createFileRoute('/_authenticated/dashboard')({
         ))}
       </div>
       <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-7">
-        <RevenueVsExpensesSkeleton />
-        <TopClientsFallback />
+        <div className="col-span-4">
+          <RevenueVsExpensesSkeleton />
+        </div>
+        <div className="col-span-3">
+          <TopClientsFallback />
+        </div>
       </div>
       <PendingInvoicesFallback />
     </div>
@@ -88,15 +96,27 @@ function RouteComponent() {
         />
       </div>
       <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-7">
-        <RevenueExpenseChart />
-        <Suspense fallback={<TopClientsFallback />}>
-          <TopClients />
-        </Suspense>
+        <div className="col-span-4">
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<RevenueVsExpensesSkeleton />}>
+              <RevenueExpenseChart />
+            </Suspense>
+          </ErrorBoundary>
+        </div>
+        <div className="col-span-3">
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<TopClientsFallback />}>
+              <TopClients />
+            </Suspense>
+          </ErrorBoundary>
+        </div>
       </div>
       <div className="flex flex-col gap-y-8">
-        <Suspense fallback={<PendingInvoicesFallback />}>
-          <PendingInvoices />
-        </Suspense>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Suspense fallback={<PendingInvoicesFallback />}>
+            <PendingInvoices />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     </div>
   )
